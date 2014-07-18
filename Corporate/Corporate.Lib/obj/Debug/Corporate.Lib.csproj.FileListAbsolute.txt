@@ -1,0 +1,5 @@
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.Lib\bin\Debug\Corporate.Lib.dll
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.Lib\bin\Debug\Corporate.Lib.pdb
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.Lib\obj\Debug\Corporate.Lib.csprojResolveAssemblyReference.cache
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.Lib\obj\Debug\Corporate.Lib.dll
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.Lib\obj\Debug\Corporate.Lib.pdb

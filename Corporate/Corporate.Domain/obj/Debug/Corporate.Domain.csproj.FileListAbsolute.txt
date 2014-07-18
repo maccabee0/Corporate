@@ -1,0 +1,4 @@
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.Domain\bin\Debug\Corporate.Domain.dll
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.Domain\bin\Debug\Corporate.Domain.pdb
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.Domain\obj\Debug\Corporate.Domain.dll
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.Domain\obj\Debug\Corporate.Domain.pdb
