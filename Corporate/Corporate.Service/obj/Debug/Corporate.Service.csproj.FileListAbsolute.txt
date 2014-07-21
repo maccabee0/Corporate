@@ -1,0 +1,12 @@
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.Service\bin\Debug\Corporate.Service.dll.config
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.Service\bin\Debug\Corporate.Service.dll
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.Service\bin\Debug\Corporate.Service.pdb
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.Service\bin\Debug\EntityFramework.dll
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.Service\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.Service\bin\Debug\EntityFramework.xml
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.Service\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.Service\obj\Debug\Corporate.Service.csprojResolveAssemblyReference.cache
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.Service\obj\Debug\Corporate.Service.dll
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.Service\obj\Debug\Corporate.Service.pdb
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.Service\bin\Debug\Corporate.Domain.dll
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.Service\bin\Debug\Corporate.Domain.pdb
