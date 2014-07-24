@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CorporateContext.cs" />
+    <Compile Include="Entities\ExceptionLog.cs" />
     <Compile Include="Entities\Expense.cs" />
     <Compile Include="Entities\Expense_Log.cs" />
     <Compile Include="Entities\Office.cs" />

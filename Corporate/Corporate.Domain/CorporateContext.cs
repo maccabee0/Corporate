@@ -21,5 +21,6 @@ namespace Corporate.Domain
         public DbSet<Office> Offices { set; get; }
         public DbSet<Expense> Expenses { get; set; }
         public DbSet<Expense_Log> ExpenseLogs { get; set; }
+        public DbSet<ExceptionLog> ExceptionLogs { get; set; }
     }
 }
