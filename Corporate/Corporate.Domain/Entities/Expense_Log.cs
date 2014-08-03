@@ -4,6 +4,7 @@ namespace Corporate.Domain.Entities
 {
     public class Expense_Log
     {
+        public int ExpenseLogId { get; set; }
         public DateTime InputDate { get; set; }
         public int Expenseid { get; set; }
         public int Officeid { get; set; }

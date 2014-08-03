@@ -1,0 +1,15 @@
+﻿<Window x:Class="Corporate.WPF.Shell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://www.codeplex.com/prism"
+        Title="Expendeture Reporting" Height="768" Width="1024" WindowState="Maximized" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="125"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>            
+        </Grid.ColumnDefinitions>
+    </Grid>
+</Window>

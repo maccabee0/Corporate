@@ -1,0 +1,9 @@
+D:\GitRepos\Corporate\Corporate\Corporate.Interfaces\obj\Debug\Corporate.Interfaces.csprojResolveAssemblyReference.cache
+D:\GitRepos\Corporate\Corporate\Corporate.Interfaces\bin\Debug\Corporate.Interfaces.dll
+D:\GitRepos\Corporate\Corporate\Corporate.Interfaces\bin\Debug\Corporate.Interfaces.pdb
+D:\GitRepos\Corporate\Corporate\Corporate.Interfaces\obj\Debug\Corporate.Interfaces.dll
+D:\GitRepos\Corporate\Corporate\Corporate.Interfaces\obj\Debug\Corporate.Interfaces.pdb
+D:\GitRepos\Corporate\Corporate\Corporate.Interfaces\bin\Debug\Corporate.Domain.dll
+D:\GitRepos\Corporate\Corporate\Corporate.Interfaces\bin\Debug\EntityFramework.dll
+D:\GitRepos\Corporate\Corporate\Corporate.Interfaces\bin\Debug\Corporate.Domain.pdb
+D:\GitRepos\Corporate\Corporate\Corporate.Interfaces\bin\Debug\EntityFramework.xml
