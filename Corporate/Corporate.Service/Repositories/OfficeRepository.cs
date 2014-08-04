@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Data;
-using System.Data.Entity;
 
 using Corporate.Domain.Entities;
 using Corporate.Domain;
@@ -30,14 +28,14 @@ namespace Corporate.Service.Repositories
             return Offices.Where(predicate).ToList();
         }
 
-        public Office GetOfficeByID(int id)
+        public Office GetOfficeById(int id)
         {
             return GetOfficesBy(o => o.Officeid == id).FirstOrDefault();
         }
 
         public void SaveOffice(Office entity)
         {
-            if (GetOfficeByID(entity.Officeid) == null)
+            if (GetOfficeById(entity.Officeid) == null)
             {
                 _context.Offices.Add(entity);
             }
@@ -50,12 +48,12 @@ namespace Corporate.Service.Repositories
 
         public void DeleteOffice(int id)
         {
-            DeleteOffice(GetOfficeByID(id));
+            DeleteOffice(GetOfficeById(id));
         }
 
-        public void DeleteOffice(Office entity)
+        public void DeleteOffice(Office office)
         {
-            _context.Offices.Remove(entity);
+            _context.Offices.Remove(office);
         }
 
 

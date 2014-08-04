@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Corporate.Domain;
 using Corporate.Domain.Entities;
@@ -10,7 +8,7 @@ using Corporate.Interfaces.Repositories;
 
 namespace Corporate.Service.Repositories
 {
-    public class ExpenseLogRepository:IExpenseLogRepository
+    public class ExpenseLogRepository : IExpenseLogRepository
     {
         private CorporateContext _context;
         public ExpenseLogRepository() { _context = new CorporateContext(); }
@@ -37,7 +35,7 @@ namespace Corporate.Service.Repositories
 
         public Expense_Log GetLogById(int id)
         {
-            return GetLogsBy(e=>e.ExpenseLogId == id).FirstOrDefault();
+            return GetLogsBy(e => e.ExpenseLogId == id).FirstOrDefault();
         }
 
 
@@ -63,5 +61,6 @@ namespace Corporate.Service.Repositories
         {
             _context.ExpenseLogs.Remove(log);
         }
+
     }
 }

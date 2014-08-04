@@ -1,4 +1,4 @@
-﻿
+﻿using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Unity;
 using Corporate.Interfaces.Repositories;
@@ -17,7 +17,7 @@ namespace Corporate.Service
 
         public void Initialize()
         {
-            _container.RegisterType<IExceptionLogRepository, ExceptionRepository>();
+            _container.RegisterType<ILoggerFacade, ExceptionRepository>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IExpenseLogRepository, ExpenseLogRepository>();
             _container.RegisterType<IOfficeRepository, OfficeRepository>();
             _container.RegisterType<IExpenseRepository, ExpenseRepository>();

@@ -1,8 +1,6 @@
 C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.WPF\bin\Debug\Corporate.WPF.exe
 C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.WPF\bin\Debug\Corporate.WPF.pdb
 C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.WPF\obj\Debug\Corporate.WPF.csprojResolveAssemblyReference.cache
-C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.WPF\obj\Debug\MainWindow.baml
-C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.WPF\obj\Debug\MainWindow.g.cs
 C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.WPF\obj\Debug\App.g.cs
 C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.WPF\obj\Debug\Corporate.WPF_MarkupCompile.cache
 C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.WPF\obj\Debug\Corporate.WPF.g.resources
@@ -106,3 +104,7 @@ D:\GitRepos\Corporate\Corporate\Corporate.WPF\obj\Debug\Shell.baml
 D:\GitRepos\Corporate\Corporate\Corporate.WPF\obj\Debug\Shell.g.cs
 D:\GitRepos\Corporate\Corporate\Corporate.WPF\bin\Debug\Corporate.Interfaces.dll
 D:\GitRepos\Corporate\Corporate\Corporate.WPF\bin\Debug\Corporate.Interfaces.pdb
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.WPF\bin\Debug\Corporate.Interfaces.dll
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.WPF\bin\Debug\Corporate.Interfaces.pdb
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.WPF\obj\Debug\Shell.baml
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.WPF\obj\Debug\Shell.g.cs
