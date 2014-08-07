@@ -16,6 +16,8 @@ namespace Corporate.Expenditures.ViewModels
         private DelegateCommand _reviewAll;
         private DelegateCommand<int> _reviewOffice;
 
+        public MainViewModel(){}
+
         public MainViewModel(IOfficeRepository officeRepository)
         {
             _officeRepository = officeRepository;

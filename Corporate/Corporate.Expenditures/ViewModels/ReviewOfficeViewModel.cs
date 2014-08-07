@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Corporate.Domain.Entities;
-using Corporate.Interfaces.Repositories;
+﻿using System.Collections.ObjectModel;
 
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
+using Corporate.Domain.Entities;
+using Corporate.Interfaces.Repositories;
+
 
 namespace Corporate.Expenditures.ViewModels
 {
@@ -21,6 +16,8 @@ namespace Corporate.Expenditures.ViewModels
         public ObservableCollection<Expense> Expenses { get; set; }
         private DelegateCommand _mainPageCommand;
         private DelegateCommand _addNewExpenseCommand;
+
+        public ReviewOfficeViewModel(){}
         
         public ReviewOfficeViewModel(IExpenseRepository expenseRepository)
         {

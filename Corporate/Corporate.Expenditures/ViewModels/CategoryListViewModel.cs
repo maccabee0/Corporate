@@ -13,6 +13,8 @@ namespace Corporate.Expenditures.ViewModels
         public IEnumerable<Expense_Log> Logs { get; set; }
         private DelegateCommand _closeCommand;
 
+        public CategoryListViewModel(){}
+
         public CategoryListViewModel(string office, string category, IEnumerable<Expense_Log> logs)
         {
             Office = office;

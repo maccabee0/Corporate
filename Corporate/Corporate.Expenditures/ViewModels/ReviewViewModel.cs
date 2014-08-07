@@ -11,11 +11,11 @@ namespace Corporate.Expenditures.ViewModels
 {
     public class ReviewViewModel : BindableBase
     {
-        private DateTime _startDate;
-        private DateTime _endDate;
         private IExpenseLogRepository _logRepository;
         private DelegateCommand _mainPageCommand;
-        public ObservableCollection<Expense_Log> Logs { get; set; }
+        public ObservableCollection<Expense_Log> _logs { get; set; }
+
+        public ReviewViewModel() { }
 
         public ReviewViewModel(IExpenseLogRepository repository)
         {

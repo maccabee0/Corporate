@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Practices.Prism.Commands;
 
 using Corporate.Domain.Entities;
 using Corporate.Interfaces.Repositories;
@@ -19,6 +19,11 @@ namespace Corporate.Expenditures.ViewModels
         private int _selectedExpense;
         private decimal _amount;
         private string _note;
+        private DelegateCommand _saveCommand;
+        private DelegateCommand _saveAddCommand;
+        private DelegateCommand _cancelCommand;
+
+        public EditViewModel(){}
 
         public EditViewModel(IExpenseRepository repository)
         {
@@ -30,5 +35,22 @@ namespace Corporate.Expenditures.ViewModels
         public IEnumerable<Expense> Expenses { get { return _expenses; } set { SetProperty(ref _expenses, value); } }
         public decimal Amount { get { return _amount; } set { SetProperty(ref _amount, value); } }
         public string Note { get { return _note; } set { SetProperty(ref _note, value); } }
+        public DelegateCommand SaveCommand { get { return _saveCommand ?? (_saveCommand = new DelegateCommand(SaveAndClose, CanSave)); } }
+        public DelegateCommand SaveAddCommand { get { return _saveAddCommand ?? (_saveAddCommand = new DelegateCommand(Save, CanSave)); } }
+        public DelegateCommand CancelCommand { get { return _cancelCommand ?? (_cancelCommand = new DelegateCommand(Cancel)); } }
+
+        private void Cancel(){}
+
+        private void Save()
+        {
+            
+        }
+
+        private void SaveAndClose(){}
+
+        private bool CanSave()
+        {
+            return (_selectedExpense != 0 && _amount != 0);
+        }
     }
 }

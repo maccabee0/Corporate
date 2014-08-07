@@ -9,7 +9,7 @@
             <RowDefinition Height="3*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>            
+        <Grid.ColumnDefinitions>
         </Grid.ColumnDefinitions>
     </Grid>
 </Window>

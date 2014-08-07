@@ -53,3 +53,5 @@ C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.Expenditures\obj
 C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.Expenditures\obj\Debug\Views\ReviewView.g.cs
 C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.Expenditures\obj\Debug\Corporate.Expenditures_MarkupCompile.cache
 C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.Expenditures\obj\Debug\Corporate.Expenditures.g.resources
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.Expenditures\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.Expenditures\obj\Debug\Corporate.Expenditures_MarkupCompile.lref

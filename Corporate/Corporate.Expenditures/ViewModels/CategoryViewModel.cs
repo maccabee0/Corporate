@@ -7,6 +7,8 @@ namespace Corporate.Expenditures.ViewModels
         private string _category;
         private decimal _total;
 
+        public CategoryViewModel(){}
+
         public CategoryViewModel(string category, decimal total)
         {
             Category = category;

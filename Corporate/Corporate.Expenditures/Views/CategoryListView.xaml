@@ -2,10 +2,54 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:Corporate.Expenditures.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
+    <UserControl.DataContext>
+        <viewModels:CategoryListViewModel/>
+    </UserControl.DataContext>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Foreground="White" FontWeight="ExtraBold" FontSize="29" Margin="5">Office:</TextBlock>
+            <TextBlock Grid.Column="1" Foreground="White" FontWeight="DemiBold" FontSize="29" Margin="5" Text="{Binding Office}">Place Holder</TextBlock>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Foreground="White" FontWeight="ExtraBold" FontSize="24" Margin="5">Category:</TextBlock>
+            <TextBlock Grid.Column="1" Foreground="White" FontWeight="DemiBold" FontSize="24" Margin="5" Text="{Binding Category}">Place Holder</TextBlock>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Border BorderBrush="Red" BorderThickness="1">
+                <ListView Margin="1" ItemsSource="{Binding Logs}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Date" Width="120" DisplayMemberBinding="{Binding InputDate, StringFormat=dd/mm/yyyy}"/>
+                            <GridViewColumn Header="Amount" Width="180" DisplayMemberBinding="{Binding Amount}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="90"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="1" Click="Button_Click" Margin="5">Close</Button>
+        </Grid>
     </Grid>
 </UserControl>
