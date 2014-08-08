@@ -5,10 +5,24 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:viewModels="clr-namespace:Corporate.Expenditures.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="700">
+             d:DesignHeight="526" d:DesignWidth="768">
     <UserControl.DataContext>
         <viewModels:MainViewModel/>
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <Style x:Key="OfficeList" TargetType="ListBox">
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <StackPanel HorizontalAlignment="Stretch">
+                            <TextBlock Text="{Binding Name}" FontSize="35" Foreground="LightGray"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
@@ -19,9 +33,21 @@
                 <RowDefinition Height="110"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" FontSize="45" Margin="20" Foreground="MidnightBlue">Offices:</TextBlock>
-            <ListBox Grid.Row="1" Background="Transparent" Margin="10" ItemsSource="{Binding Offices}">
-                <ListBoxItem ></ListBoxItem>
+            <TextBlock Grid.Row="0" FontSize="45" Margin="20" Foreground="AliceBlue">Offices:</TextBlock>
+            <ListBox Grid.Row="1" Background="Transparent" Margin="10" ItemsSource="{Binding OfficesView}" Style="{Binding Source={StaticResource OfficeList}}" >
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Foreground" Value="Tomato"/>
+                                <Setter Property="Background" Value="Tomato"/>
+                            </Trigger>
+                        </Style.Triggers>
+                        <Style.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"></SolidColorBrush>
+                        </Style.Resources>
+                    </Style>
+                </ListBox.ItemContainerStyle>
             </ListBox>
         </Grid>
         <Grid Grid.Column="1">
@@ -29,6 +55,14 @@
                 <RowDefinition Height="110"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            <Grid Grid.Row="1">
+                <Button Margin="20,30" VerticalAlignment="Top" Height="50" Command="{Binding ReviewAllCommand}">
+                    <TextBlock FontSize="20">Review Company Totals</TextBlock>
+                </Button>
+                <Button Margin="20,100" VerticalAlignment="Top" Height="50" Command="{Binding ReviewOfficeCommand}">
+                    <TextBlock FontSize="20">Review Office Totals</TextBlock>
+                </Button>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

@@ -1,4 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows.Data;
 
 using Corporate.Domain.Entities;
 using Corporate.Interfaces.Repositories;
@@ -8,40 +12,60 @@ using Microsoft.Practices.Prism.Mvvm;
 
 namespace Corporate.Expenditures.ViewModels
 {
-    public class MainViewModel:BindableBase
+    public class MainViewModel : BindableBase
     {
         private IOfficeRepository _officeRepository;
         public ObservableCollection<Office> Offices { get; set; }
-        private int _selectedOffice;
-        private DelegateCommand _reviewAll;
-        private DelegateCommand<int> _reviewOffice;
+        private ICollectionView _officesView;
+        private DelegateCommand _reviewAllCommand;
+        private DelegateCommand _reviewOfficeCommand;
 
-        public MainViewModel(){}
+        public MainViewModel()
+        {
+            var list = new List<Office>
+                {
+                    new Office { Officeid = 1, Name = "London" }, 
+                    new Office { Officeid = 2, Name = "New York" }, 
+                    new Office { Officeid = 3, Name = "Kyiv" }
+                };
+            Offices = new ObservableCollection<Office>(list);
+            _officesView=new CollectionView(Offices);
+            _officesView.MoveCurrentToFirst();
+        }
 
         public MainViewModel(IOfficeRepository officeRepository)
         {
             _officeRepository = officeRepository;
-            Offices = new ObservableCollection<Office>(officeRepository.GetOfficesBy(o => true));
+            Offices = new ObservableCollection<Office>(_officeRepository.GetOfficesBy(o => true));
+            _officesView = new CollectionView(Offices);
+            _officesView.CurrentChanged += OnCurrentOfficeChanged;
         }
 
-        public DelegateCommand ReviewAllCommand { get { return _reviewAll ?? (_reviewAll = new DelegateCommand(ReviewAll)); } }
-        public DelegateCommand<int> ReviewOfficeCommand { get { return _reviewOffice ?? (_reviewOffice = new DelegateCommand<int>(ReviewOffice, CanReviewOffice)); } }
+        public ICollectionView OfficesView { get { return _officesView; } }
+        public Office CurrentOffice { get { return _officesView.CurrentItem as Office; } }
+        public DelegateCommand ReviewAllCommand { get { return _reviewAllCommand ?? (_reviewAllCommand = new DelegateCommand(ReviewAll)); } }
+        public DelegateCommand ReviewOfficeCommand { get { return _reviewOfficeCommand ?? (_reviewOfficeCommand = new DelegateCommand(ReviewOffice, CanReviewOffice)); } }
 
-        public int SelectedOffice { get { return _selectedOffice; } set { SetProperty(ref _selectedOffice,value); } }
 
         public void ReviewAll()
         {
 
         }
 
-        public void ReviewOffice(int officeId)
+        public void ReviewOffice()
         {
 
         }
 
-        public bool CanReviewOffice(int officeId)
+        public bool CanReviewOffice()
         {
-            return officeId != 0;
+            return CurrentOffice != null;
+        }
+
+        private void OnCurrentOfficeChanged(object sender, EventArgs e)
+        {
+            OnPropertyChanged(() => CurrentOffice);
+            _reviewOfficeCommand.RaiseCanExecuteChanged();
         }
     }
 }

@@ -139,6 +139,10 @@
       <Project>{c5cd4998-21d0-4628-bf4b-d52d863ec588}</Project>
       <Name>Corporate.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Corporate.Expenditures\Corporate.Expenditures.csproj">
+      <Project>{ccf6bbbd-ba06-4ce4-8d85-83d44c08b9bb}</Project>
+      <Name>Corporate.Expenditures</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Corporate.Service\Corporate.Service.csproj">
       <Project>{4d1125ca-c45c-4b96-bed3-0e19f84e12cd}</Project>
       <Name>Corporate.Service</Name>
@@ -149,7 +153,12 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Theme\Theme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

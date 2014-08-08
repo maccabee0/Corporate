@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Corporate.Domain;
+using Corporate.Expenditures.Views;
+
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
@@ -23,7 +26,9 @@ namespace Corporate.Expenditures
 
         public void Initialize()
         {
-            throw new NotImplementedException();
+            _regionManager.RegisterViewWithRegion(RegionNames.MainRegion, () => _container.Resolve<MainView>());
+            _regionManager.RegisterViewWithRegion(RegionNames.MainRegion, () => _container.Resolve<ReviewOfficeView>());
+            _regionManager.RegisterViewWithRegion(RegionNames.MainRegion, () => _container.Resolve<ReviewView>());
         }
     }
 }

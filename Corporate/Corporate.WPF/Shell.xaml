@@ -2,14 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:prism="http://www.codeplex.com/prism"
-        Title="Expendeture Reporting" Height="768" Width="1024" WindowState="Maximized" >
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="125"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="50"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-        </Grid.ColumnDefinitions>
-    </Grid>
+        xmlns:regions="clr-namespace:Corporate.Domain;assembly=Corporate.Domain"
+        Title="Expendeture Reporting" Height="526" Width="768" >
+    <Frame Background="{StaticResource MainBackground}" prism:RegionManager.RegionName="{x:Static regions:RegionNames.MainRegion}">
+    </Frame>
 </Window>

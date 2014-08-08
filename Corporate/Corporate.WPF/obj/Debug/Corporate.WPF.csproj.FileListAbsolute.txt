@@ -108,3 +108,7 @@ C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.WPF\bin\Debug\Co
 C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.WPF\bin\Debug\Corporate.Interfaces.pdb
 C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.WPF\obj\Debug\Shell.baml
 C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.WPF\obj\Debug\Shell.g.cs
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.WPF\obj\Debug\Theme\Theme.baml
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.WPF\obj\Debug\App.baml
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.WPF\bin\Debug\Corporate.Expenditures.dll
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.WPF\bin\Debug\Corporate.Expenditures.pdb

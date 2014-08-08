@@ -9,7 +9,18 @@
     <UserControl.DataContext>
         <viewModels:CategoryListViewModel/>
     </UserControl.DataContext>
-    <Grid >
+    <UserControl.Resources>
+        <Style x:Key="LogList" TargetType="ListView">
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
@@ -35,6 +46,7 @@
         <Grid Grid.Row="2">
             <Border BorderBrush="Red" BorderThickness="1">
                 <ListView Margin="1" ItemsSource="{Binding Logs}">
+                    <!-- Style="{Binding Source={StaticResource LogList}}"-->
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Date" Width="120" DisplayMemberBinding="{Binding InputDate, StringFormat=dd/mm/yyyy}"/>
