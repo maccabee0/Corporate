@@ -13,11 +13,21 @@ namespace Corporate.Expenditures.ViewModels
         private string _officeLocal;
         private IExpenseRepository _expenseRepository; 
         public ObservableCollection<CategoryViewModel> Categories { get; set; }
-        public ObservableCollection<Expense> Expenses { get; set; }
+        public ObservableCollection<Expense_Log> ExpenseLogs { get; set; }
         private DelegateCommand _mainPageCommand;
         private DelegateCommand _addNewExpenseCommand;
 
-        public ReviewOfficeViewModel(){}
+        public ReviewOfficeViewModel()
+        {
+            OfficeLocal = "London";
+            Categories = new ObservableCollection<CategoryViewModel>
+                             {
+                                 new CategoryViewModel("Coffee/Tea", 100),
+                                 new CategoryViewModel("Internet",400),
+                                 new CategoryViewModel("Other",50)
+                             };
+
+        }
         
         public ReviewOfficeViewModel(IExpenseRepository expenseRepository)
         {

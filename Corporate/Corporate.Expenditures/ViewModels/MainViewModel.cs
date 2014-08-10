@@ -9,12 +9,14 @@ using Corporate.Interfaces.Repositories;
 
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
+using Microsoft.Practices.Unity;
 
 namespace Corporate.Expenditures.ViewModels
 {
     public class MainViewModel : BindableBase
     {
-        private IOfficeRepository _officeRepository;
+        [Dependency]
+        private IOfficeRepository _officeRepository { get; set; }
         public ObservableCollection<Office> Offices { get; set; }
         private ICollectionView _officesView;
         private DelegateCommand _reviewAllCommand;
@@ -29,7 +31,7 @@ namespace Corporate.Expenditures.ViewModels
                     new Office { Officeid = 3, Name = "Kyiv" }
                 };
             Offices = new ObservableCollection<Office>(list);
-            _officesView=new CollectionView(Offices);
+            _officesView = new CollectionView(Offices);
             _officesView.MoveCurrentToFirst();
         }
 
