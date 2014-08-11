@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="526" d:DesignWidth="768">
     <UserControl.Resources>
-        <ResourceDictionary Source="../Theme/Theme.xaml"/>
+        <ResourceDictionary Source="/Corporate.Expenditures;Components/../Theme/Theme.xaml"/>
     </UserControl.Resources>
     <UserControl.DataContext>
         <viewModels:ReviewOfficeViewModel/>
@@ -24,30 +24,39 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20" Background="Transparent" Template="{StaticResource BackButton}" Command="{Binding MainPageCommand}">
-                <!--<StackPanel Orientation="Horizontal">
-                    <Image Source="/Images/left_blue_arrow_clip_art_9823.jpg" Margin="15" Height="30"/>
-                    <Label Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" FontSize="24">Back to Main</Label>
-                </StackPanel>-->
+            <Button Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20" Background="Transparent" Template="{DynamicResource BackButton}" Command="{Binding MainPageCommand}">
             </Button>
-            <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Foreground="White">Office:</TextBlock>
-                <TextBlock Text="{Binding OfficeLocal}" Foreground="White" FontSize="24"/>
+            
+            <StackPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10">
+                <TextBlock Foreground="{StaticResource TextBrush}" FontSize="20">Office:</TextBlock>
+                <TextBlock Text="{Binding OfficeLocal}" Foreground="{StaticResource TextBrush}" FontSize="30"/>
             </StackPanel>
 
         </Grid>
 
         <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
-            <ListBox Grid.Column="0" ItemsSource="{Binding Categories}">
+            <Grid Grid.Column="0" Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Foreground="{DynamicResource TextBrush}" FontSize="{DynamicResource labelFontSize}">Date</Label>
+                <Label Grid.Column="1" Foreground="{DynamicResource TextBrush}" FontSize="{DynamicResource labelFontSize}">Amount</Label>
+            </Grid>
+            <ListBox Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Categories}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Category}"/>
-                            <TextBlock Text="{Binding Total}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Grid.Column="0" Text="{Binding Category}"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Total}"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

@@ -32,7 +32,7 @@ namespace Corporate.Expenditures.ViewModels
                 };
             Offices = new ObservableCollection<Office>(list);
             _officesView = new CollectionView(Offices);
-            _officesView.MoveCurrentToFirst();
+            //_officesView.MoveCurrentToFirst();
         }
 
         public MainViewModel(IOfficeRepository officeRepository)

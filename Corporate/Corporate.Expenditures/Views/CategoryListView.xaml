@@ -10,15 +10,7 @@
         <viewModels:CategoryListViewModel/>
     </UserControl.DataContext>
     <UserControl.Resources>
-        <Style x:Key="LogList" TargetType="ListView">
-            <Setter Property="ItemTemplate">
-                <Setter.Value>
-                    <DataTemplate>
-                        
-                    </DataTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <ResourceDictionary Source="../Theme/Theme.xaml"/>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -44,17 +36,20 @@
             <TextBlock Grid.Column="1" Foreground="White" FontWeight="DemiBold" FontSize="24" Margin="5" Text="{Binding Category}">Place Holder</TextBlock>
         </Grid>
         <Grid Grid.Row="2">
-            <Border BorderBrush="Red" BorderThickness="1">
-                <ListView Margin="1" ItemsSource="{Binding Logs}">
-                    <!-- Style="{Binding Source={StaticResource LogList}}"-->
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Date" Width="120" DisplayMemberBinding="{Binding InputDate, StringFormat=dd/mm/yyyy}"/>
-                            <GridViewColumn Header="Amount" Width="180" DisplayMemberBinding="{Binding Amount}"/>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </Border>
+            <ListBox Margin="1" ItemsSource="{Binding Logs}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="{Binding InputDate, StringFormat=dd/mm/yyyy}"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Amount}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </Grid>
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>

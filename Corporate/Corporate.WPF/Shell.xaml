@@ -4,6 +4,9 @@
         xmlns:prism="http://www.codeplex.com/prism"
         xmlns:regions="clr-namespace:Corporate.Domain;assembly=Corporate.Domain"
         Title="Expendeture Reporting" Height="526" Width="768" >
-    <Frame Background="{StaticResource MainBackground}" prism:RegionManager.RegionName="{x:Static regions:RegionNames.MainRegion}">
+    <Grid Background="{StaticResource MainBackground}" >
+        <Label HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10,10" Foreground="{StaticResource TextBrush}" FontSize="50">Corporation</Label>
+        <Frame prism:RegionManager.RegionName="{x:Static regions:RegionNames.MainRegion}">
     </Frame>
+    </Grid>
 </Window>

@@ -112,3 +112,4 @@ E:\Users\Maccabee\Documents\GitRepo\Corporate\Corporate\Corporate.Expenditures\o
 E:\Users\Maccabee\Documents\GitRepo\Corporate\Corporate\Corporate.Expenditures\obj\Debug\Corporate.Expenditures.g.resources
 E:\Users\Maccabee\Documents\GitRepo\Corporate\Corporate\Corporate.Expenditures\obj\Debug\Corporate.Expenditures.dll
 E:\Users\Maccabee\Documents\GitRepo\Corporate\Corporate\Corporate.Expenditures\obj\Debug\Corporate.Expenditures.pdb
+C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.Expenditures\obj\Debug\Theme\Theme.baml
