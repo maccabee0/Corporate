@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="526" d:DesignWidth="768">
     <UserControl.Resources>
-        <ResourceDictionary Source="/Corporate.Expenditures;Components/../Theme/Theme.xaml"/>
+        <ResourceDictionary Source="../Theme/Theme.xaml"/>
     </UserControl.Resources>
     <UserControl.DataContext>
         <viewModels:ReviewOfficeViewModel/>
@@ -24,7 +24,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20" Background="Transparent" Template="{DynamicResource BackButton}" Command="{Binding MainPageCommand}">
+            <Button Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20" 
+                    Template="{StaticResource BackButton}" Command="{Binding MainPageCommand}">
             </Button>
             
             <StackPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10">
@@ -48,20 +49,29 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Foreground="{DynamicResource TextBrush}" FontSize="{DynamicResource labelFontSize}">Date</Label>
-                <Label Grid.Column="1" Foreground="{DynamicResource TextBrush}" FontSize="{DynamicResource labelFontSize}">Amount</Label>
+                <Label Grid.Column="0" Foreground="{StaticResource TextBrush}" FontSize="{StaticResource labelFontSize}">Date</Label>
+                <Label Grid.Column="1" Foreground="{StaticResource TextBrush}" FontSize="{StaticResource labelFontSize}">Amount</Label>
             </Grid>
             <ListBox Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Categories}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
+                        <Grid> 
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Text="{Binding Category}"/>
                             <TextBlock Grid.Column="1" Text="{Binding Total}"/>
-                        </StackPanel>
+                        </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <ListBox Grid.Column="2" ></ListBox>
+            <Grid Grid.Column="1" Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <ListBox Grid.Column="1" Grid.Row="1"></ListBox>
         </Grid>
     </Grid>
 </UserControl>

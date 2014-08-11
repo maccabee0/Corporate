@@ -41,7 +41,7 @@
         <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
     </Style>
     
-    <Style x:Key="ListBoxStyle" TargetType="{x:Type ListBox}">
+    <Style TargetType="{x:Type ListBox}">
        <Setter Property="Background" Value="{StaticResource ListBoxBackground}"/>
         <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
         <Setter Property="FontSize" Value="{StaticResource listBoxFontSize}"/>
