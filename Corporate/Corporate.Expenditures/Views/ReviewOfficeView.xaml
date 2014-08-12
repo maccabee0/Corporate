@@ -24,21 +24,13 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-<<<<<<< HEAD
-            <Button Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20" Template="{StaticResource BackButton}" Command="{Binding MainPageCommand}">
-=======
-            <Button Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20" 
-                    Template="{StaticResource BackButton}" Command="{Binding MainPageCommand}">
->>>>>>> origin/master
-            </Button>
-            
+            <Button Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20" Template="{StaticResource BackButton}" Command="{Binding MainPageCommand}"/>
+            <Button Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20" Template="{StaticResource BackButton}" Command="{Binding MainPageCommand}"/>
             <StackPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10">
                 <TextBlock Foreground="{StaticResource TextBrush}" FontSize="20">Office:</TextBlock>
                 <TextBlock Text="{Binding OfficeLocal}" Foreground="{StaticResource TextBrush}" FontSize="30"/>
             </StackPanel>
-
         </Grid>
-
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -53,18 +45,13 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-<<<<<<< HEAD
                 <Label Grid.Column="0" Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}">Category</Label>
                 <Label Grid.Column="1" Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}">Amount</Label>
-=======
-                <Label Grid.Column="0" Foreground="{StaticResource TextBrush}" FontSize="{StaticResource labelFontSize}">Date</Label>
-                <Label Grid.Column="1" Foreground="{StaticResource TextBrush}" FontSize="{StaticResource labelFontSize}">Amount</Label>
->>>>>>> origin/master
             </Grid>
             <ListBox Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Categories}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Grid> 
+                        <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
@@ -76,7 +63,6 @@
                 </ListBox.ItemTemplate>
             </ListBox>
             <Grid Grid.Column="1" Grid.Row="0">
-<<<<<<< HEAD
                 <Label Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}">Office Expences:</Label>
             </Grid>
             <ListBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding ExpenseLogs}">
@@ -99,25 +85,21 @@
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/><ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" FontSize="{StaticResource LabelFontSize}" Foreground="{StaticResource TextBrush}" >Total:</Label>
                 <TextBlock Grid.Column="2" Margin="10" Text="{Binding OfficeTotal}" FontSize="{StaticResource LabelFontSize}" Foreground="{StaticResource TextBrush}"></TextBlock>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="1" Margin="10" Command="{Binding EditExpenseCommand}">Edit Expense</Button>
                 <Button Grid.Column="2" Margin="10" Command="{Binding AddNewExpenseCommand}">Add Expense</Button>
             </Grid>
-=======
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-            </Grid>
-            <ListBox Grid.Column="1" Grid.Row="1"></ListBox>
->>>>>>> origin/master
         </Grid>
     </Grid>
 </UserControl>

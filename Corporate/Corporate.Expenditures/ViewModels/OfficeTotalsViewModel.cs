@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.ComponentModel;
-
+using System.Windows.Data;
 using Microsoft.Practices.Prism.Mvvm;
 
 using Corporate.Domain.Entities;
@@ -35,6 +35,7 @@ namespace Corporate.Expenditures.ViewModels
         {
             OfficeLocal = office.Name;
             SetUpCategories(office);
+            _categoryView=new CollectionView(_categoryViewModels);
         }
 
         public string OfficeLocal { get { return _officeLocal; } set { SetProperty(ref _officeLocal, value); } }
