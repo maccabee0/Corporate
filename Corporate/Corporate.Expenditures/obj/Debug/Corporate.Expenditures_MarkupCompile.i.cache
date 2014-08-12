@@ -4,7 +4,7 @@
 library
 C#
 .cs
-C:\Users\mbrinda\Documents\GitHub\Corporate\Corporate\Corporate.Expenditures\obj\Debug\
+E:\Users\Maccabee\Documents\GitRepo\Corporate\Corporate\Corporate.Expenditures\obj\Debug\
 Corporate.Expenditures
 none
 false
@@ -12,8 +12,13 @@ DEBUG;TRACE
 
 61611416085
 1-2114600146
+<<<<<<< HEAD
 18-1222121492
 28-801054317
+=======
+17-309077550
+28-459307629
+>>>>>>> origin/master
 Theme\Theme.xaml;Views\CategoryListView.xaml;Views\EditView.xaml;Views\MainView.xaml;Views\ReviewOfficeView.xaml;Views\ReviewView.xaml;
 
 True
