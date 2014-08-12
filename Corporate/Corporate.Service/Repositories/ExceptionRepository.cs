@@ -14,7 +14,7 @@ namespace Corporate.Service.Repositories
     public class ExceptionRepository : IExceptionLogRepository,ILoggerFacade
     {
         private CorporateContext _context;
-        public ExceptionRepository() { _context = new CorporateContext(); }
+        //public ExceptionRepository() { _context = new CorporateContext(); }
         public ExceptionRepository(CorporateContext context) { _context = context; }
         public IQueryable<ExceptionLog> ExceptionLogs
         {

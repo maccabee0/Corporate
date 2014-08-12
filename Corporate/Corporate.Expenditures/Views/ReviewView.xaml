@@ -9,10 +9,20 @@
     <UserControl.Resources>
         <ResourceDictionary Source="../Theme/Theme.xaml"/>
     </UserControl.Resources>
-    <UserControl.DataContext>
+    <!--<UserControl.DataContext>
         <viewModels:ReviewViewModel/>
-    </UserControl.DataContext>
+    </UserControl.DataContext>-->
     <Grid>
-            
+         <Grid.RowDefinitions>
+             <RowDefinition Height="2*"/><RowDefinition Height="6*"/><RowDefinition Height="*"/>
+         </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Template="{StaticResource BackButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20" Command="{Binding MainPageCommand}"></Button>
+            <Label Grid.Column="1" Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}" HorizontalAlignment="Center" VerticalAlignment="Center">Company Totals</Label>
+        </Grid>
+        <ListBox Grid.Row="1"></ListBox>
     </Grid>
 </UserControl>

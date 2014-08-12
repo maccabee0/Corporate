@@ -6,7 +6,7 @@ using Microsoft.Practices.Unity;
 
 namespace Corporate.WPF
 {
-    public class CorporateBootstrapper:UnityBootstrapper
+    public class CorporateBootstrapper : UnityBootstrapper
     {
         protected override DependencyObject CreateShell()
         {
@@ -24,8 +24,10 @@ namespace Corporate.WPF
         protected override void ConfigureModuleCatalog()
         {
             base.ConfigureModuleCatalog();
-            var moduleCatalog = (ModuleCatalog) this.ModuleCatalog;
-            moduleCatalog.AddModule(typeof (Expenditures.ExpenditureModule));
+            var moduleCatalog = (ModuleCatalog)this.ModuleCatalog;
+            moduleCatalog.AddModule(typeof(Domain.DomainModule));
+            moduleCatalog.AddModule(typeof(Service.ServiceModule));
+            moduleCatalog.AddModule(typeof(Expenditures.ExpenditureModule));
         }
     }
 }

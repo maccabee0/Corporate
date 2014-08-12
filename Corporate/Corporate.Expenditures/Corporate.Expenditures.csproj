@@ -88,6 +88,7 @@
     <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\EditViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\OfficeTotalsViewModel.cs" />
     <Compile Include="ViewModels\ReviewOfficeViewModel.cs" />
     <Compile Include="ViewModels\ReviewViewModel.cs" />
     <Compile Include="Views\CategoryListView.xaml.cs">

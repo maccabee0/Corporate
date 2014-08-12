@@ -12,7 +12,7 @@ namespace Corporate.Service.Repositories
     public class ExpenseRepository:IExpenseRepository
     {
         private CorporateContext _context;
-        public ExpenseRepository() { _context = new CorporateContext(); }
+        //public ExpenseRepository() { _context = new CorporateContext(); }
         public ExpenseRepository(CorporateContext context) { _context = context; }
         public IQueryable<Expense> Expenses
         {

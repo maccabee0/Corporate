@@ -11,7 +11,7 @@ namespace Corporate.Service.Repositories
     public class ExpenseLogRepository : IExpenseLogRepository
     {
         private CorporateContext _context;
-        public ExpenseLogRepository() { _context = new CorporateContext(); }
+        //public ExpenseLogRepository() { _context = new CorporateContext(); }
         public ExpenseLogRepository(CorporateContext context) { _context = context; }
         public IQueryable<Expense_Log> ExpenseLogs
         {

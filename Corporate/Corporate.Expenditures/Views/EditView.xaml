@@ -6,6 +6,9 @@
              xmlns:viewModels="clr-namespace:Corporate.Expenditures.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary Source="../Theme/Theme.xaml"/>
+    </UserControl.Resources>
     <UserControl.DataContext>
         <viewModels:EditViewModel/>
     </UserControl.DataContext>

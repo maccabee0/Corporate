@@ -4,13 +4,15 @@ namespace Corporate.Expenditures.ViewModels
 {
     public class CategoryViewModel:BindableBase
     {
+        public int Id { get; set; }
         private string _category;
         private decimal _total;
 
         public CategoryViewModel(){}
 
-        public CategoryViewModel(string category, decimal total)
+        public CategoryViewModel(int id,string category, decimal total)
         {
+            Id = id;
             Category = category;
             Total = total;
         }

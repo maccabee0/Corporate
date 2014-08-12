@@ -6,9 +6,9 @@
              xmlns:viewModels="clr-namespace:Corporate.Expenditures.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="526" d:DesignWidth="768">
-    <UserControl.DataContext>
+    <!--<UserControl.DataContext>
         <viewModels:MainViewModel/>
-    </UserControl.DataContext>
+    </UserControl.DataContext>-->
     <UserControl.Resources>
         <ResourceDictionary Source="../Theme/Theme.xaml"/>
     </UserControl.Resources>

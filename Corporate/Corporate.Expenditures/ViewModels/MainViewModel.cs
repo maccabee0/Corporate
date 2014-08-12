@@ -13,34 +13,35 @@ using Microsoft.Practices.Unity;
 
 namespace Corporate.Expenditures.ViewModels
 {
-    public class MainViewModel : BindableBase
+    public class MainViewModel : BindableBase,IMainViewModel
     {
-        [Dependency]
-        private IOfficeRepository _officeRepository { get; set; }
+        //[Dependency]
+        public IOfficeRepository _officeRepository { get; set; }
         public ObservableCollection<Office> Offices { get; set; }
         private ICollectionView _officesView;
         private DelegateCommand _reviewAllCommand;
         private DelegateCommand _reviewOfficeCommand;
 
-        public MainViewModel()
-        {
-            var list = new List<Office>
-                {
-                    new Office { Officeid = 1, Name = "London" }, 
-                    new Office { Officeid = 2, Name = "New York" }, 
-                    new Office { Officeid = 3, Name = "Kyiv" }
-                };
-            Offices = new ObservableCollection<Office>(list);
-            _officesView = new CollectionView(Offices);
-            //_officesView.MoveCurrentToFirst();
-        }
-
+        //public MainViewModel()
+        //{
+        //    var list = new List<Office>
+        //        {
+        //            new Office { Officeid = 1, Name = "London" }, 
+        //            new Office { Officeid = 2, Name = "New York" }, 
+        //            new Office { Officeid = 3, Name = "Kyiv" }
+        //        };
+        //    Offices = new ObservableCollection<Office>(list);
+        //    _officesView = new CollectionView(Offices);
+        //    //_officesView.MoveCurrentToFirst(); 
+        //    _officesView.CurrentChanged += OnCurrentOfficeChanged;
+        //}
+        
         public MainViewModel(IOfficeRepository officeRepository)
         {
             _officeRepository = officeRepository;
             Offices = new ObservableCollection<Office>(_officeRepository.GetOfficesBy(o => true));
             _officesView = new CollectionView(Offices);
-            _officesView.CurrentChanged += OnCurrentOfficeChanged;
+        _officesView.CurrentChanged += OnCurrentOfficeChanged;
         }
 
         public ICollectionView OfficesView { get { return _officesView; } }
@@ -67,7 +68,11 @@ namespace Corporate.Expenditures.ViewModels
         private void OnCurrentOfficeChanged(object sender, EventArgs e)
         {
             OnPropertyChanged(() => CurrentOffice);
-            _reviewOfficeCommand.RaiseCanExecuteChanged();
+            ReviewOfficeCommand.RaiseCanExecuteChanged();
         }
+    }
+
+    public interface IMainViewModel
+    {
     }
 }

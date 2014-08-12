@@ -20,8 +20,8 @@
         <GradientStop Color="MidnightBlue" Offset="0.90"/>
     </LinearGradientBrush>
     
-    <sys:Double x:Key="listBoxFontSize">24</sys:Double>
-    <sys:Double x:Key="labelFontSize">30</sys:Double>
+    <sys:Double x:Key="ListBoxFontSize">20</sys:Double>
+    <sys:Double x:Key="LabelFontSize">30</sys:Double>
 
     <LinearGradientBrush x:Key="ButtonBrush" StartPoint="0,0.5" EndPoint="1,0.5">
         <GradientStop Color="MidnightBlue" Offset="0"/>
@@ -30,27 +30,29 @@
     </LinearGradientBrush>
 
     <ControlTemplate TargetType="Button" x:Key="BackButton">
+        <ControlTemplate.Resources>
+        </ControlTemplate.Resources>
         <StackPanel Orientation="Horizontal">
             <Image Source="/Images/left_blue_arrow_clip_art_9823.jpg" Margin="15" Height="30"/>
             <Label Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" FontSize="24">Back to Main</Label>
         </StackPanel> 
     </ControlTemplate>
     
-    <Style TargetType="{x:Type Button}">
+    <Style TargetType="Button">
         <Setter Property="Background" Value="{StaticResource ButtonBrush}"/>
         <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
     </Style>
     
-    <Style x:Key="ListBoxStyle" TargetType="{x:Type ListBox}">
+    <Style TargetType="{x:Type ListBox}">
        <Setter Property="Background" Value="{StaticResource ListBoxBackground}"/>
         <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
-        <Setter Property="FontSize" Value="{StaticResource listBoxFontSize}"/>
+        <Setter Property="FontSize" Value="{StaticResource ListBoxFontSize}"/>
     </Style>
 
     <Style x:Key="OfficeList" TargetType="ListBox">
         <Setter Property="Background" Value="{StaticResource ListBoxBackground}"/>
         <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
-        <Setter Property="FontSize" Value="{StaticResource listBoxFontSize}"/>
+        <Setter Property="FontSize" Value="{StaticResource ListBoxFontSize}"/>
         <Setter Property="ItemTemplate">
             <Setter.Value>
                 <DataTemplate>

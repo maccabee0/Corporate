@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Corporate.Domain.Entities
 {
     public class Expense
     {
+        [Key]
         public int Expenseid { get; set; }
-        public int Name { get; set; }
+        public string Name { get; set; }
         public ICollection<Expense_Log> Logs { get; set; }
     }
 }

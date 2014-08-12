@@ -1,5 +1,9 @@
 ﻿using System.Windows.Controls;
 
+using Corporate.Expenditures.ViewModels;
+
+using Microsoft.Practices.Unity;
+
 namespace Corporate.Expenditures.Views
 {
     /// <summary>
@@ -7,9 +11,10 @@ namespace Corporate.Expenditures.Views
     /// </summary>
     public partial class MainView : UserControl
     {
-        public MainView()
+        public MainView(IUnityContainer container)
         {
             InitializeComponent();
+            this.DataContext = container.Resolve<MainViewModel>();
         }
     }
 }

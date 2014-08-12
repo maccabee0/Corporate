@@ -1,5 +1,9 @@
 ﻿using System.Windows.Controls;
 
+using Corporate.Expenditures.ViewModels;
+
+using Microsoft.Practices.Unity;
+
 namespace Corporate.Expenditures.Views
 {
     /// <summary>
@@ -7,9 +11,10 @@ namespace Corporate.Expenditures.Views
     /// </summary>
     public partial class ReviewView : UserControl
     {
-        public ReviewView()
+        public ReviewView(IUnityContainer container)
         {
             InitializeComponent();
+            DataContext = container.Resolve<ReviewViewModel>();
         }
     }
 }
