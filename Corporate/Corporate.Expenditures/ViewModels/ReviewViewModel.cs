@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
+using System.Windows.Data;
 
 using Corporate.Domain.Entities;
 using Corporate.Interfaces.Repositories;
@@ -13,10 +15,10 @@ namespace Corporate.Expenditures.ViewModels
 {
     public class ReviewViewModel : BindableBase
     {
-        private IExpenseLogRepository _logRepository;
+        private IOfficeRepository _officeRepository;
         private DelegateCommand _mainPageCommand;
         private DelegateCommand _reviewByCategoryCommand;
-        //public ObservableCollection<Expense_Log> _logs { get; set; }
+        public ObservableCollection<OfficeTotalsViewModel> OfficeTotalsViewModels { get; set; }
         private ICollectionView _officeTotalsView;
 
         public ReviewViewModel()
@@ -24,9 +26,12 @@ namespace Corporate.Expenditures.ViewModels
             var list = new List<Office> {};
         }
 
-        public ReviewViewModel(IExpenseLogRepository repository)
+        public ReviewViewModel(IOfficeRepository repository)
         {
-            _logRepository = repository;
+            _officeRepository = repository;
+            var list = _officeRepository.GetOfficesBy(o => true).Select(office => new OfficeTotalsViewModel(office)).ToList();
+            OfficeTotalsViewModels=new ObservableCollection<OfficeTotalsViewModel>(list);
+            _officeTotalsView = new CollectionView(OfficeTotalsViewModels);
         }
 
         public ICollectionView OfficeTotalsView { get { return _officeTotalsView; } }

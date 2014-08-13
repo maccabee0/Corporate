@@ -6,7 +6,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Data;
 
+using Corporate.Expenditures.Notifications;
+
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.Mvvm;
 using Corporate.Domain.Entities;
 using Corporate.Interfaces.Repositories;
@@ -19,6 +22,7 @@ namespace Corporate.Expenditures.ViewModels
         private string _officeLocal;
         private decimal _officeTotal;
         private IExpenseRepository _expenseRepository;
+        private IExpenseLogRepository _expenseLogRepository;
         public ObservableCollection<CategoryViewModel> Categories { get; set; }
         public ObservableCollection<Expense_Log> ExpenseLogs { get; set; }
         private ICollectionView _expenseLogView;
@@ -55,27 +59,50 @@ namespace Corporate.Expenditures.ViewModels
             OfficeTotal = list.Sum(e => e.Amount);
         }
 
-        public ReviewOfficeViewModel(IExpenseRepository expenseRepository)
+        public ReviewOfficeViewModel(IExpenseRepository expenseRepository, IExpenseLogRepository expenseLogRepository)
         {
             _expenseRepository = expenseRepository;
+            _expenseLogRepository = expenseLogRepository;
         }
 
         public string OfficeLocal { get { return _officeLocal; } set { SetProperty(ref _officeLocal, value); } }
         public decimal OfficeTotal { get { return _officeTotal; } set { SetProperty(ref _officeTotal, value); } }
         public ICollectionView ExpenseLogView { get { return _expenseLogView; } }
         public Expense_Log CurrentExpense { get { return _expenseLogView.CurrentItem as Expense_Log; } }
-
+        //Commands
         public DelegateCommand MainPageCommand { get { return _mainPageCommand ?? (_mainPageCommand = new DelegateCommand(MainPage)); } }
-
         public DelegateCommand AddNewExpenseCommand { get { return _addNewExpenseCommand ?? (_addNewExpenseCommand = new DelegateCommand(AddNewExpense)); } }
-
         public DelegateCommand EditExpenseCommand { get { return _editExpenseCommand ?? (_editExpenseCommand = new DelegateCommand(EditExpense, CanEditExpense)); } }
+        //InteractionRequests
+        public InteractionRequest<EditExpenseNotification> EditExpenseRequest { get; private set; }
 
         private void MainPage() { }
 
-        private void AddNewExpense() { }
+        private void AddNewExpense()
+        {
+            var notification = new EditExpenseNotification();
+            EditExpenseRequest.Raise(notification, 
+                returned =>
+                    {
+                        if (returned != null && returned.Confirmed && returned.ExpenseLog != null)
+                        {
+                            _expenseLogRepository.SaveLog(returned.ExpenseLog);
+                        }
+                    });
+        }
 
-        private void EditExpense() { }
+        private void EditExpense()
+        {
+            var notification = new EditExpenseNotification(CurrentExpense);
+            EditExpenseRequest.Raise(notification,
+                returned =>
+                    {
+                        if (returned != null && returned.Confirmed && returned.ExpenseLog != null)
+                        {
+                            _expenseLogRepository.SaveLog(returned.ExpenseLog);
+                        }
+                    });
+        }
 
         private bool CanEditExpense()
         {
