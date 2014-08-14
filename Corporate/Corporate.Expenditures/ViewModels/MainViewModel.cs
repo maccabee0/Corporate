@@ -3,24 +3,26 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
-
+using Corporate.Domain;
 using Corporate.Domain.Entities;
 using Corporate.Interfaces.Repositories;
 
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
+using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 
 namespace Corporate.Expenditures.ViewModels
 {
-    public class MainViewModel : BindableBase,IMainViewModel
+    public class MainViewModel : BindableBase, IRegionMemberLifetime
     {
         //[Dependency]
-        public IOfficeRepository _officeRepository { get; set; }
+        private IOfficeRepository _officeRepository { get; set; }
         public ObservableCollection<Office> Offices { get; set; }
         private ICollectionView _officesView;
         private DelegateCommand _reviewAllCommand;
         private DelegateCommand _reviewOfficeCommand;
+        private IRegionManager _regionManager;
 
         //public MainViewModel()
         //{
@@ -35,13 +37,14 @@ namespace Corporate.Expenditures.ViewModels
         //    //_officesView.MoveCurrentToFirst(); 
         //    _officesView.CurrentChanged += OnCurrentOfficeChanged;
         //}
-        
-        public MainViewModel(IOfficeRepository officeRepository)
+
+        public MainViewModel(IOfficeRepository officeRepository, IRegionManager regionManager)
         {
             _officeRepository = officeRepository;
             Offices = new ObservableCollection<Office>(_officeRepository.GetOfficesBy(o => true));
             _officesView = new CollectionView(Offices);
-        _officesView.CurrentChanged += OnCurrentOfficeChanged;
+            _officesView.CurrentChanged += OnCurrentOfficeChanged;
+            _regionManager = regionManager;
         }
 
         public ICollectionView OfficesView { get { return _officesView; } }
@@ -57,7 +60,11 @@ namespace Corporate.Expenditures.ViewModels
 
         public void ReviewOffice()
         {
-
+            NavigationParameters parameters = new NavigationParameters();
+            var office = CurrentOffice;
+            parameters.Add(ExpenditureKeys.OfficeId, office.Officeid);
+            parameters.Add(ExpenditureKeys.OfficeLocal, office.Name);
+            _regionManager.RequestNavigate(RegionNames.MainRegion, new Uri(ExpenditureKeys.ReviewOfficeView + parameters, UriKind.Relative));
         }
 
         public bool CanReviewOffice()
@@ -70,9 +77,7 @@ namespace Corporate.Expenditures.ViewModels
             OnPropertyChanged(() => CurrentOffice);
             ReviewOfficeCommand.RaiseCanExecuteChanged();
         }
-    }
 
-    public interface IMainViewModel
-    {
+        public bool KeepAlive { get { return true; } }
     }
 }

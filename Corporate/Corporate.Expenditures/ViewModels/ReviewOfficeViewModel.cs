@@ -13,16 +13,18 @@ using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.Mvvm;
 using Corporate.Domain.Entities;
 using Corporate.Interfaces.Repositories;
+using Microsoft.Practices.Prism.Regions;
 
 
 namespace Corporate.Expenditures.ViewModels
 {
-    public class ReviewOfficeViewModel : BindableBase
+    public class ReviewOfficeViewModel : BindableBase, INavigationAware
     {
         private string _officeLocal;
         private decimal _officeTotal;
         private IExpenseRepository _expenseRepository;
         private IExpenseLogRepository _expenseLogRepository;
+        private IRegionNavigationJournal _navigationJournal;
         public ObservableCollection<CategoryViewModel> Categories { get; set; }
         public ObservableCollection<Expense_Log> ExpenseLogs { get; set; }
         private ICollectionView _expenseLogView;
@@ -55,7 +57,7 @@ namespace Corporate.Expenditures.ViewModels
                 }
             }
             ExpenseLogs = new ObservableCollection<Expense_Log>(list);
-            _expenseLogView=new CollectionView(ExpenseLogs);
+            _expenseLogView = new CollectionView(ExpenseLogs);
             OfficeTotal = list.Sum(e => e.Amount);
         }
 
@@ -63,6 +65,9 @@ namespace Corporate.Expenditures.ViewModels
         {
             _expenseRepository = expenseRepository;
             _expenseLogRepository = expenseLogRepository;
+            ExpenseLogs=new ObservableCollection<Expense_Log>(_expenseLogRepository.GetLogsByOffice(1));
+            _expenseLogView=new CollectionView(ExpenseLogs);
+            EditExpenseRequest=new InteractionRequest<EditExpenseNotification>();
         }
 
         public string OfficeLocal { get { return _officeLocal; } set { SetProperty(ref _officeLocal, value); } }
@@ -76,19 +81,31 @@ namespace Corporate.Expenditures.ViewModels
         //InteractionRequests
         public InteractionRequest<EditExpenseNotification> EditExpenseRequest { get; private set; }
 
-        private void MainPage() { }
+        private void MainPage()
+        {
+            if (_navigationJournal != null)
+            {
+                _navigationJournal.GoBack();
+            }
+        }
 
         private void AddNewExpense()
         {
             var notification = new EditExpenseNotification();
-            EditExpenseRequest.Raise(notification, 
+            EditExpenseRequest.Raise(notification,
                 returned =>
+                {
+                    if (returned != null && returned.Confirmed && returned.ExpenseLog != null)
                     {
-                        if (returned != null && returned.Confirmed && returned.ExpenseLog != null)
-                        {
-                            _expenseLogRepository.SaveLog(returned.ExpenseLog);
-                        }
-                    });
+                        _expenseLogRepository.SaveLog(returned.ExpenseLog);
+                    }
+                });
+        }
+
+        void GetOfficeExpenseLogs(int id, string officeLocal)
+        {
+            OfficeLocal = officeLocal;
+            ExpenseLogs = new ObservableCollection<Expense_Log>(_expenseLogRepository.GetLogsByOffice(id));
         }
 
         private void EditExpense()
@@ -96,17 +113,37 @@ namespace Corporate.Expenditures.ViewModels
             var notification = new EditExpenseNotification(CurrentExpense);
             EditExpenseRequest.Raise(notification,
                 returned =>
+                {
+                    if (returned != null && returned.Confirmed && returned.ExpenseLog != null)
                     {
-                        if (returned != null && returned.Confirmed && returned.ExpenseLog != null)
-                        {
-                            _expenseLogRepository.SaveLog(returned.ExpenseLog);
-                        }
-                    });
+                        _expenseLogRepository.SaveLog(returned.ExpenseLog);
+                    }
+                });
         }
 
         private bool CanEditExpense()
         {
             return CurrentExpense != null;
         }
+
+        #region Navigation
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            var id = int.Parse(navigationContext.Parameters[ExpenditureKeys.OfficeId].ToString());
+            var local = (string)navigationContext.Parameters[ExpenditureKeys.OfficeLocal];
+            GetOfficeExpenseLogs(id, local);
+            _navigationJournal = navigationContext.NavigationService.Journal;
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
     }
 }

@@ -82,6 +82,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExpenditureKeys.cs" />
     <Compile Include="ExpenditureModule.cs" />
     <Compile Include="Notifications\EditExpenseNotification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

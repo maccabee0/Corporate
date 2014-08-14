@@ -27,8 +27,8 @@ namespace Corporate.Expenditures
             _container.RegisterType<EditViewModel>();
             _container.RegisterType<CategoryViewModel>();
             _regionManager.RegisterViewWithRegion(RegionNames.MainRegion, typeof(MainView));
-            //_regionManager.RegisterViewWithRegion(RegionNames.MainRegion, () => _container.Resolve<ReviewOfficeView>());
-            //_regionManager.RegisterViewWithRegion(RegionNames.MainRegion, () => _container.Resolve<ReviewView>());
+            _regionManager.RegisterViewWithRegion(RegionNames.MainRegion, typeof(ReviewOfficeView));
+            //_regionManager.RegisterViewWithRegion(RegionNames.MainRegion, typeof(ReviewView));
         }
     }
 }
