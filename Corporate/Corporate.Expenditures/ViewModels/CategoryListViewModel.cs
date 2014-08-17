@@ -34,6 +34,6 @@ namespace Corporate.Expenditures.ViewModels
         }
         public DelegateCommand CloseCommand { get { return _closeCommand ?? (_closeCommand = new DelegateCommand(Close)); } }
 
-        public void Close(){}
+        public void Close() { }
     }
 }

@@ -55,7 +55,7 @@ namespace Corporate.Expenditures.ViewModels
 
         public void ReviewAll()
         {
-            //_regionManager.RequestNavigate(RegionNames.MainRegion, new Uri(ExpenditureKeys.ReviewView, UriKind.Relative));
+            _regionManager.RequestNavigate(RegionNames.MainRegion, new Uri(ExpenditureKeys.ReviewView, UriKind.Relative));
         }
 
         public void ReviewOffice()

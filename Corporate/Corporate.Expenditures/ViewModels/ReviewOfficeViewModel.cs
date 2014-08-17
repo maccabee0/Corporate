@@ -74,16 +74,27 @@ namespace Corporate.Expenditures.ViewModels
                 {
                     if (returned != null && returned.Confirmed && returned.Amount != 0 && returned.SelectedExpenseId != 0)
                     {
-                        _expenseLogRepository.SaveLog(new Expense_Log
-                                                          {
-                                                              Amount = returned.Amount,
-                                                              Description = returned.Note,
-                                                              Expenseid = returned.SelectedExpenseId,
-                                                              InputDate = DateTime.Now,
-                                                              Officeid = returned.OfficeId
-                                                          });
+                        _expenseLogRepository.SaveLog(CreateExpenseLog(returned));
                     }
                 });
+        }
+
+        private bool CanEditExpense()
+        {
+            return CurrentExpense != null;
+        }
+
+        private Expense_Log CreateExpenseLog(EditExpenseNotification returned)
+        {
+            return new Expense_Log
+            {
+                Amount = returned.Amount,
+                Description = returned.Note,
+                Expenseid = returned.SelectedExpenseId,
+                ExpenseLogId = returned.LogId,
+                InputDate = DateTime.Now,
+                Officeid = returned.OfficeId
+            };
         }
 
         void GetOfficeExpenseLogs(int id, string officeLocal)
@@ -102,22 +113,9 @@ namespace Corporate.Expenditures.ViewModels
                 {
                     if (returned != null && returned.Confirmed && returned.Amount != 0 && returned.SelectedExpenseId != 0)
                     {
-                        _expenseLogRepository.SaveLog(new Expense_Log
-                        {
-                            Amount = returned.Amount,
-                            Description = returned.Note,
-                            Expenseid = returned.SelectedExpenseId,
-                            ExpenseLogId = returned.LogId,
-                            InputDate = DateTime.Now,
-                            Officeid = returned.OfficeId
-                        });
+                        _expenseLogRepository.SaveLog(CreateExpenseLog(returned));
                     }
                 });
-        }
-
-        private bool CanEditExpense()
-        {
-            return CurrentExpense != null;
         }
 
         #region Navigation

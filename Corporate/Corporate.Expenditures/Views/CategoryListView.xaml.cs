@@ -8,7 +8,7 @@ namespace Corporate.Expenditures.Views
     /// <summary>
     /// Interaction logic for CategoryListView.xaml
     /// </summary>
-    public partial class CategoryListView : UserControl
+    public partial class CategoryListView : UserControl, IInteractionRequestAware
     {
         public CategoryListView()
         {

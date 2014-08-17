@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:Corporate.Expenditures.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             Height="300" Width="300">
     <UserControl.DataContext>
         <viewModels:CategoryListViewModel/>
     </UserControl.DataContext>
@@ -35,22 +35,21 @@
             <TextBlock Grid.Column="0" Foreground="White" FontWeight="ExtraBold" FontSize="24" Margin="5">Category:</TextBlock>
             <TextBlock Grid.Column="1" Foreground="White" FontWeight="DemiBold" FontSize="24" Margin="5" Text="{Binding Category}">Place Holder</TextBlock>
         </Grid>
-        <Grid Grid.Row="2">
-            <ListBox Margin="1" ItemsSource="{Binding Logs}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="{Binding InputDate, StringFormat=dd/mm/yyyy}"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Amount}"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </Grid>
+        <ListView Grid.Row="2" ItemsSource="{Binding Logs}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding InputDate, StringFormat=dd/MM/yyyy}" Width="90"/>
+                    <GridViewColumn Header="Amount" DisplayMemberBinding="{Binding Amount, StringFormat=C}" Width="90"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <!--<DataGrid Grid.Row="2" ItemsSource="{Binding Logs}" AutoGenerateColumns="False" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Date" Binding="{Binding InputDate,StringFormat=dd/mm/yyyy}" Width="75"/>
+                    <DataGridTextColumn Header="Amount" Binding="{Binding Amount,StringFormat=C}" Width="100"/>
+                    <DataGridTextColumn Header="Note" Binding="{Binding Description}" />
+                </DataGrid.Columns>
+            </DataGrid>-->
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
