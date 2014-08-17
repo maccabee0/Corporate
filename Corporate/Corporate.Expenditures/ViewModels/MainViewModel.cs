@@ -14,7 +14,7 @@ using Microsoft.Practices.Unity;
 
 namespace Corporate.Expenditures.ViewModels
 {
-    public class MainViewModel : BindableBase, IRegionMemberLifetime
+    public class MainViewModel : BindableBase, IRegionMemberLifetime,INavigationAware
     {
         //[Dependency]
         private IOfficeRepository _officeRepository { get; set; }
@@ -55,7 +55,7 @@ namespace Corporate.Expenditures.ViewModels
 
         public void ReviewAll()
         {
-
+            //_regionManager.RequestNavigate(RegionNames.MainRegion, new Uri(ExpenditureKeys.ReviewView, UriKind.Relative));
         }
 
         public void ReviewOffice()
@@ -78,6 +78,25 @@ namespace Corporate.Expenditures.ViewModels
             ReviewOfficeCommand.RaiseCanExecuteChanged();
         }
 
-        public bool KeepAlive { get { return true; } }
+        public bool KeepAlive
+        {
+            get { return true; }
+        }
+
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            //throw new NotImplementedException();
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;
+            //throw new NotImplementedException();
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+            //throw new NotImplementedException();
+        }
     }
 }

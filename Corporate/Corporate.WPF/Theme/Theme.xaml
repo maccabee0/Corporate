@@ -18,10 +18,4 @@
         <GradientStop Color="MidnightBlue" Offset="0.90"/>
     </LinearGradientBrush>
 
-    <LinearGradientBrush x:Key="ButtonBrush" StartPoint="0,0.5" EndPoint="1,0.5">
-        <GradientStop Color="MidnightBlue" Offset="0"/>
-        <GradientStop Color="SteelBlue" Offset="0.5"/>
-        <GradientStop Color="SkyBlue" Offset="0.90"/>
-    </LinearGradientBrush>
-
 </ResourceDictionary>

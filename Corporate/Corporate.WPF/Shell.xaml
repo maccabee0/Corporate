@@ -6,7 +6,7 @@
         Title="Expendeture Reporting" Height="526" Width="768" >
     <Grid Background="{StaticResource MainBackground}" >
         <Label HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10,10" Foreground="{StaticResource TextBrush}" FontSize="50">Corporation</Label>
-        <Frame prism:RegionManager.RegionName="{x:Static regions:RegionNames.MainRegion}">
-    </Frame>
+        <ContentControl prism:RegionManager.RegionName="{x:Static regions:RegionNames.MainRegion}">
+    </ContentControl>
     </Grid>
 </Window>

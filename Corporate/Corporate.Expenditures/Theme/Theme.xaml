@@ -5,6 +5,7 @@
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    
 
     <!--Basic Brushes-->
     <Color x:Key="PrimaryColor">#FF696969</Color>
@@ -28,20 +29,17 @@
         <GradientStop Color="SteelBlue" Offset="0.5"/>
         <GradientStop Color="SkyBlue" Offset="0.90"/>
     </LinearGradientBrush>
-
-    <ControlTemplate TargetType="Button" x:Key="BackButton">
-        <ControlTemplate.Resources>
-        </ControlTemplate.Resources>
-        <StackPanel Orientation="Horizontal">
-            <Image Source="/Images/left_blue_arrow_clip_art_9823.jpg" Margin="15" Height="30"/>
-            <Label Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="White" FontSize="24">Back to Main</Label>
-        </StackPanel> 
-    </ControlTemplate>
     
-    <Style TargetType="Button">
+    <Style TargetType="{x:Type Button}">
         <Setter Property="Background" Value="{StaticResource ButtonBrush}"/>
         <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
     </Style>
+    
+    <ControlTemplate TargetType="Button" x:Key="BackButton">
+        <StackPanel Orientation="Horizontal">
+            <Image Source="../Images/left_blue_arrow_clip_art_9823.jpg" Margin="15" Height="30"/>
+        </StackPanel> 
+    </ControlTemplate>
     
     <Style TargetType="{x:Type ListBox}">
        <Setter Property="Background" Value="{StaticResource ListBoxBackground}"/>

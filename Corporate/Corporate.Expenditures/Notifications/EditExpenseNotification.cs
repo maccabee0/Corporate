@@ -10,14 +10,32 @@ using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 
 namespace Corporate.Expenditures.Notifications
 {
-    public class EditExpenseNotification:Confirmation
+    public class EditExpenseNotification : Confirmation
     {
-        public Expense_Log ExpenseLog { get; set; }
-
-        public EditExpenseNotification(){ExpenseLog=new Expense_Log();}
+        public EditExpenseNotification(int officeId,string officeLocal)
+        {
+            Title = "New";
+            OfficeLocal = officeLocal;
+            OfficeId = officeId;
+        }
         public EditExpenseNotification(Expense_Log log)
         {
-            ExpenseLog = log;
+            Title = "Edit";
+            OfficeId = log.Officeid;
+            OfficeLocal = log.Office.Name;
+            Amount = log.Amount;
+            Note = log.Description;
+            SelectedExpenseId = log.Expenseid;
+            LogId = log.ExpenseLogId;
         }
+
+        public IEnumerable<Expense> Expenses { get; set; }
+
+        public int OfficeId { get; set; }
+        public string OfficeLocal { get; set; }
+        public decimal Amount { get; set; }
+        public int SelectedExpenseId { get; set; }
+        public string Note { get; set; }
+        public int LogId { get; set; }
     }
 }

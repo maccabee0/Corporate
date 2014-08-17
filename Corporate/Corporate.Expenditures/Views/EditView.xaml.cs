@@ -1,4 +1,6 @@
 ﻿using System.Windows.Controls;
+using Corporate.Expenditures.ViewModels;
+using Microsoft.Practices.Unity;
 
 namespace Corporate.Expenditures.Views
 {
@@ -10,6 +12,7 @@ namespace Corporate.Expenditures.Views
         public EditView()
         {
             InitializeComponent();
+            DataContext = new EditViewModel();
         }
     }
 }
