@@ -24,20 +24,6 @@ namespace Corporate.Expenditures.ViewModels
         private DelegateCommand _reviewOfficeCommand;
         private IRegionManager _regionManager;
 
-        //public MainViewModel()
-        //{
-        //    var list = new List<Office>
-        //        {
-        //            new Office { Officeid = 1, Name = "London" }, 
-        //            new Office { Officeid = 2, Name = "New York" }, 
-        //            new Office { Officeid = 3, Name = "Kyiv" }
-        //        };
-        //    Offices = new ObservableCollection<Office>(list);
-        //    _officesView = new CollectionView(Offices);
-        //    //_officesView.MoveCurrentToFirst(); 
-        //    _officesView.CurrentChanged += OnCurrentOfficeChanged;
-        //}
-
         public MainViewModel(IOfficeRepository officeRepository, IRegionManager regionManager)
         {
             _officeRepository = officeRepository;

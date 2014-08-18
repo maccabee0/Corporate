@@ -5,7 +5,7 @@ using Corporate.Domain.Entities;
 
 namespace Corporate.Domain
 {
-    public class CorporateContext:DbContext
+    public class CorporateContext : DbContext
     {
         public CorporateContext()
             : base("name=CorporateContext")

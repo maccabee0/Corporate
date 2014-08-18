@@ -8,6 +8,6 @@ namespace Corporate.Domain.Entities
         [Key]
         public int Officeid { get; set; }
         public string Name { get; set; }
-        public ICollection<Expense_Log> Logs { get; set; }
+        public virtual ICollection<Expense_Log> Logs { get; set; }
     }
 }

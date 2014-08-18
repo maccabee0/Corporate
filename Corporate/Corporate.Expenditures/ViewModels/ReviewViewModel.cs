@@ -9,6 +9,7 @@ using Corporate.Domain.Entities;
 using Corporate.Interfaces.Repositories;
 
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Regions;
 
@@ -21,6 +22,7 @@ namespace Corporate.Expenditures.ViewModels
         private DelegateCommand _mainPageCommand;
         private DelegateCommand _reviewByCategoryCommand;
         public ObservableCollection<OfficeTotalsViewModel> OfficeTotalsViewModels { get; set; }
+        public InteractionRequest<INotification> CategoryListRequest { get; set; }
         private ICollectionView _officeTotalsView;
 
         public ReviewViewModel()
@@ -28,13 +30,15 @@ namespace Corporate.Expenditures.ViewModels
             var list = new List<Office> { };
         }
 
-        public ReviewViewModel(IOfficeRepository repository)
+        public ReviewViewModel(IOfficeRepository repository, IEnumerable<Expense> expenses)
         {
             _officeRepository = repository;
-            var list = _officeRepository.GetOfficesBy(o => true).Select(office => new OfficeTotalsViewModel(office)).ToList();
+            var list = _officeRepository.GetOfficesBy(o => true).Select(office => new OfficeTotalsViewModel(office, expenses)).ToList();
             OfficeTotalsViewModels = new ObservableCollection<OfficeTotalsViewModel>(list);
+            CategoryListRequest = new InteractionRequest<INotification>();
         }
 
+        public Office CurrentOffice { get { return OfficeTotalsView.CurrentItem as Office; } }
         public ICollectionView OfficeTotalsView { get { return _officeTotalsView; } }
         public DelegateCommand MainPageCommand { get { return _mainPageCommand ?? (_mainPageCommand = new DelegateCommand(MainPage)); } }
         public DelegateCommand ReviewByCategoryCommand { get { return _reviewByCategoryCommand ?? (_reviewByCategoryCommand = new DelegateCommand(ReviewByCategory)); } }
@@ -47,7 +51,12 @@ namespace Corporate.Expenditures.ViewModels
             }
         }
 
-        private void ReviewByCategory() { }
+        private void ReviewByCategory()
+        {
+            var expense = new Expense();
+            var listView = new CategoryListViewModel(CurrentOffice.Name, "Other", CurrentOffice.Logs.Where(l => l.Expenseid == expense.Expenseid));
+            CategoryListRequest.Raise(new Notification { Content = listView, Title = CurrentOffice.Name });
+        }
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {

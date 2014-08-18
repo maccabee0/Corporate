@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Corporate.Domain.Entities;
 
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 
 namespace Corporate.Expenditures.ViewModels
 {
@@ -12,7 +13,6 @@ namespace Corporate.Expenditures.ViewModels
         public string Office { get; set; }
         public string Category { get; set; }
         public IEnumerable<Expense_Log> Logs { get; set; }
-        private DelegateCommand _closeCommand;
 
         public CategoryListViewModel()
         {
@@ -32,8 +32,5 @@ namespace Corporate.Expenditures.ViewModels
             Category = category;
             Logs = logs;
         }
-        public DelegateCommand CloseCommand { get { return _closeCommand ?? (_closeCommand = new DelegateCommand(Close)); } }
-
-        public void Close() { }
     }
 }

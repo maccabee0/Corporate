@@ -13,7 +13,7 @@ namespace Corporate.Domain.Entities
         public decimal Amount { get; set; }
         public string Description { get; set; }
 
-        public Office Office { get; set; }
-        public Expense Expense { get; set; }
+        public virtual Office Office { get; set; }
+        public virtual Expense Expense { get; set; }
     }
 }

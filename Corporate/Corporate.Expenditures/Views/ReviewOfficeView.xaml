@@ -58,7 +58,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}">Category</Label>
-                <Label Grid.Column="1" Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}">Amount</Label>
+                <Label Grid.Column="1" Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}">Total</Label>
             </Grid>
             <ListBox Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Categories}">
                 <ListBox.ItemTemplate>

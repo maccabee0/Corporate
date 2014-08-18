@@ -2,6 +2,9 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:prism="http://www.codeplex.com/prism"
+             xmlns:views="clr-namespace:Corporate.Expenditures.Views"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:Corporate.Expenditures.ViewModels"
              mc:Ignorable="d" 
@@ -9,6 +12,15 @@
     <UserControl.Resources>
         <ResourceDictionary Source="../Theme/Theme.xaml"/>
     </UserControl.Resources>
+    <i:Interaction.Triggers>
+        <prism:InteractionRequestTrigger SourceObject="{Binding CategoryListRequest}">
+            <prism:PopupWindowAction>
+                <prism:PopupWindowAction.WindowContent>
+                    <views:CategoryListView/>
+                </prism:PopupWindowAction.WindowContent>
+            </prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
     <!--<UserControl.DataContext>
         <viewModels:ReviewViewModel/>
     </UserControl.DataContext>-->
@@ -23,6 +35,13 @@
             <Button Grid.Column="0" Template="{StaticResource BackButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20" Command="{Binding MainPageCommand}"></Button>
             <Label Grid.Column="1" Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}" HorizontalAlignment="Center" VerticalAlignment="Center">Company Totals</Label>
         </Grid>
-        <ListBox Grid.Row="1"></ListBox>
+        <ListView Grid.Row="1" ItemsSource="{Binding OfficeTotalsViewModels}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Office" DisplayMemberBinding="{Binding OfficeLocal}"/>
+                    <GridViewColumn Header=""></GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </UserControl>

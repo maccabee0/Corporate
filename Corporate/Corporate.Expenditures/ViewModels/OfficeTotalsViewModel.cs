@@ -17,45 +17,28 @@ namespace Corporate.Expenditures.ViewModels
         private string _officeLocal;
         private ObservableCollection<CategoryViewModel> _categoryViewModels;
         private ICollectionView _categoryView;
-
-        public OfficeTotalsViewModel()
-            : this(new Office
-                {
-                    Name = "London",
-                    Officeid = 1,
-                    Logs = new Collection<Expense_Log>
-                        {
-                            new Expense_Log{Amount = 20,Expenseid = 1,Expense = new Expense{Expenseid = 1,Name = "Coffee/Tea"},InputDate = DateTime.Now},
-                    new Expense_Log{Amount = 140,Expenseid = 2,Expense = new Expense{Expenseid = 2,Name = "Internet"},InputDate = DateTime.Now},
-                    new Expense_Log{Amount = 500,Expenseid = 3,Expense = new Expense{Expenseid = 3,Name = "Other"},InputDate = DateTime.Now}
-                        }
-                }) { }
-
-        public OfficeTotalsViewModel(Office office)
+        
+        public OfficeTotalsViewModel(Office office, IEnumerable<Expense> expenses)
         {
             OfficeLocal = office.Name;
-            SetUpCategories(office);
+            CategoryViewModels=new ObservableCollection<CategoryViewModel>();
+            SetUpCategories(office, expenses);
             _categoryView=new CollectionView(_categoryViewModels);
         }
 
         public string OfficeLocal { get { return _officeLocal; } set { SetProperty(ref _officeLocal, value); } }
-        public ObservableCollection<CategoryViewModel> CategoryViewModels { get { return _categoryViewModels; } }
+        public ObservableCollection<CategoryViewModel> CategoryViewModels { get { return _categoryViewModels; } set { SetProperty(ref _categoryViewModels, value); } }
         public ICollectionView CategoryView { get { return _categoryView; } }
 
-        private void SetUpCategories(Office office)
+        private void SetUpCategories(Office office, IEnumerable<Expense> expenses)
         {
-            foreach (var log in office.Logs)
+            foreach (var expense in expenses)
             {
-                if (CategoryViewModels.All(c => c.Id != log.Expenseid))
-                {
-                    CategoryViewModels.Add(new CategoryViewModel(log.Expenseid, log.Expense.Name, log.Amount));
-                }
-                else
-                {
-                    var cat = CategoryViewModels.FirstOrDefault(c => c.Id == log.Expenseid);
-                    if (cat != null) cat.Total += log.Amount;
-                }
+                CategoryViewModels.Add(new CategoryViewModel(expense.Expenseid, expense.Name,
+                                                office.Logs.Where(l => l.Expenseid == expense.Expenseid)
+                                                      .Sum(l => l.Amount)));
             }
+            
         }
     }
 }

@@ -38,6 +38,7 @@
     <ControlTemplate TargetType="Button" x:Key="BackButton">
         <StackPanel Orientation="Horizontal">
             <Image Source="../Images/left_blue_arrow_clip_art_9823.jpg" Margin="15" Height="30"/>
+            <TextBlock Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}">Back To Main</TextBlock>
         </StackPanel> 
     </ControlTemplate>
     

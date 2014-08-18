@@ -129,7 +129,8 @@ namespace Corporate.Expenditures.ViewModels
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
-            return true;
+            var id = int.Parse(navigationContext.Parameters[ExpenditureKeys.OfficeId].ToString());
+            return id == _officeId || _officeId == 0;
         }
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
@@ -140,7 +141,7 @@ namespace Corporate.Expenditures.ViewModels
 
         public bool KeepAlive
         {
-            get { return false; }
+            get { return true; }
         }
     }
 }

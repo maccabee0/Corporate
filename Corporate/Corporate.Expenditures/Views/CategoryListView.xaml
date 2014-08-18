@@ -6,13 +6,13 @@
              xmlns:viewModels="clr-namespace:Corporate.Expenditures.ViewModels"
              mc:Ignorable="d" 
              Height="300" Width="300">
-    <UserControl.DataContext>
+    <!--<UserControl.DataContext>
         <viewModels:CategoryListViewModel/>
-    </UserControl.DataContext>
+    </UserControl.DataContext>-->
     <UserControl.Resources>
         <ResourceDictionary Source="../Theme/Theme.xaml"/>
     </UserControl.Resources>
-    <Grid>
+    <Grid DataContext="{Binding Content}">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
