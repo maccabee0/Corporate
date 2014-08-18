@@ -5,7 +5,7 @@
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    
+
 
     <!--Basic Brushes-->
     <Color x:Key="PrimaryColor">#FF696969</Color>
@@ -20,7 +20,7 @@
         <GradientStop Color="SteelBlue" Offset="0.5"/>
         <GradientStop Color="MidnightBlue" Offset="0.90"/>
     </LinearGradientBrush>
-    
+
     <sys:Double x:Key="ListBoxFontSize">20</sys:Double>
     <sys:Double x:Key="LabelFontSize">30</sys:Double>
 
@@ -29,21 +29,21 @@
         <GradientStop Color="SteelBlue" Offset="0.5"/>
         <GradientStop Color="SkyBlue" Offset="0.90"/>
     </LinearGradientBrush>
-    
+
     <Style TargetType="{x:Type Button}">
         <Setter Property="Background" Value="{StaticResource ButtonBrush}"/>
         <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
     </Style>
-    
+
     <ControlTemplate TargetType="Button" x:Key="BackButton">
         <StackPanel Orientation="Horizontal">
             <Image Source="../Images/left_blue_arrow_clip_art_9823.jpg" Margin="15" Height="30"/>
             <TextBlock Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}">Back To Main</TextBlock>
-        </StackPanel> 
+        </StackPanel>
     </ControlTemplate>
-    
+    <!--ListBov-->
     <Style TargetType="{x:Type ListBox}">
-       <Setter Property="Background" Value="{StaticResource ListBoxBackground}"/>
+        <Setter Property="Background" Value="{StaticResource ListBoxBackground}"/>
         <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
         <Setter Property="FontSize" Value="{StaticResource ListBoxFontSize}"/>
     </Style>
@@ -62,7 +62,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <Style TargetType="{x:Type ListBoxItem}">
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="True">
@@ -75,5 +75,10 @@
             <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
         </Style.Resources>
     </Style>
-
+    <!--ListView-->
+    <Style TargetType="{x:Type ListView}">
+        <Setter Property="Background" Value="{StaticResource ListBoxBackground}"/>
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+        <Setter Property="FontSize" Value="{StaticResource ListBoxFontSize}"/>
+    </Style>
 </ResourceDictionary>

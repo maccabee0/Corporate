@@ -12,7 +12,7 @@
     <UserControl.Resources>
         <ResourceDictionary Source="../Theme/Theme.xaml"/>
     </UserControl.Resources>
-    <Grid DataContext="{Binding Content}">
+    <Grid DataContext="{Binding Content}" Background="{StaticResource MainBackground}">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
@@ -38,8 +38,8 @@
         <ListView Grid.Row="2" ItemsSource="{Binding Logs}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding InputDate, StringFormat=dd/MM/yyyy}" Width="90"/>
-                    <GridViewColumn Header="Amount" DisplayMemberBinding="{Binding Amount, StringFormat=C}" Width="90"/>
+                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding InputDate, StringFormat=dd/MM/yyyy}" />
+                    <GridViewColumn Header="Amount" DisplayMemberBinding="{Binding Amount, StringFormat=C}" />
                 </GridView>
             </ListView.View>
         </ListView>

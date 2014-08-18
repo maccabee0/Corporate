@@ -35,11 +35,12 @@ namespace Corporate.Expenditures.ViewModels
             _officeRepository = repository;
             var list = _officeRepository.GetOfficesBy(o => true).Select(office => new OfficeTotalsViewModel(office, expenses)).ToList();
             OfficeTotalsViewModels = new ObservableCollection<OfficeTotalsViewModel>(list);
+            OfficeTotalsView.Refresh();
             CategoryListRequest = new InteractionRequest<INotification>();
         }
 
         public Office CurrentOffice { get { return OfficeTotalsView.CurrentItem as Office; } }
-        public ICollectionView OfficeTotalsView { get { return _officeTotalsView; } }
+        public ICollectionView OfficeTotalsView { get { return new CollectionView(OfficeTotalsViewModels); } }
         public DelegateCommand MainPageCommand { get { return _mainPageCommand ?? (_mainPageCommand = new DelegateCommand(MainPage)); } }
         public DelegateCommand ReviewByCategoryCommand { get { return _reviewByCategoryCommand ?? (_reviewByCategoryCommand = new DelegateCommand(ReviewByCategory)); } }
 
@@ -53,14 +54,15 @@ namespace Corporate.Expenditures.ViewModels
 
         private void ReviewByCategory()
         {
-            var expense = new Expense();
-            var listView = new CategoryListViewModel(CurrentOffice.Name, "Other", CurrentOffice.Logs.Where(l => l.Expenseid == expense.Expenseid));
+            var expense = new Expense { Expenseid = 1, Name = "Other" };
+            var listView = new CategoryListViewModel(CurrentOffice.Name, expense.Name, CurrentOffice.Logs.Where(l => l.Expenseid == expense.Expenseid));
             CategoryListRequest.Raise(new Notification { Content = listView, Title = CurrentOffice.Name });
         }
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             _navigationJournal = navigationContext.NavigationService.Journal;
+            OfficeTotalsView.Refresh();
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -73,6 +75,6 @@ namespace Corporate.Expenditures.ViewModels
             //throw new NotImplementedException();
         }
 
-        public bool KeepAlive { get { return false; } }
+        public bool KeepAlive { get { return true; } }
     }
 }
