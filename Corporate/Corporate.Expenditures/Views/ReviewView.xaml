@@ -25,15 +25,23 @@
         <viewModels:ReviewViewModel/>
     </UserControl.DataContext>-->
     <Grid>
-         <Grid.RowDefinitions>
-             <RowDefinition Height="2*"/><RowDefinition Height="6*"/><RowDefinition Height="*"/>
-         </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/><ColumnDefinition Width="*"/><ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Template="{StaticResource BackButton}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20" Command="{Binding MainPageCommand}"></Button>
-            <Label Grid.Column="1" Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}" HorizontalAlignment="Center" VerticalAlignment="Center">Company Totals</Label>
+            <Button Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20" Command="{Binding MainPageCommand}" FontSize="{StaticResource LabelFontSize}">Back To Main</Button>
+            <StackPanel Grid.Column="1" >
+                <Label Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}" HorizontalAlignment="Center" VerticalAlignment="Center">Company</Label>
+                <Label Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}" HorizontalAlignment="Center" VerticalAlignment="Center">Totals</Label>
+            </StackPanel>
+
         </Grid>
         <ListView Grid.Row="1" ItemsSource="{Binding OfficeTotalsViewModels}">
             <ListView.View>
@@ -43,5 +51,12 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/><ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}">Totals:</Label>
+            <StackPanel Grid.Column="1" DataContext="{Binding ExpenseTotalsViewModel}" Orientation="Horizontal"></StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

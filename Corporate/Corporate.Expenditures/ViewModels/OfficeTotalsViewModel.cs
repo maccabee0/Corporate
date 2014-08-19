@@ -17,18 +17,21 @@ namespace Corporate.Expenditures.ViewModels
         private string _officeLocal;
         private ObservableCollection<CategoryViewModel> _categoryViewModels;
         private ICollectionView _categoryView;
+        private decimal _total;
         
         public OfficeTotalsViewModel(Office office, IEnumerable<Expense> expenses)
         {
             OfficeLocal = office.Name;
             CategoryViewModels=new ObservableCollection<CategoryViewModel>();
             SetUpCategories(office, expenses);
+            Total = CategoryViewModels.Sum(c => c.Total);
             _categoryView=new CollectionView(_categoryViewModels);
         }
 
         public string OfficeLocal { get { return _officeLocal; } set { SetProperty(ref _officeLocal, value); } }
         public ObservableCollection<CategoryViewModel> CategoryViewModels { get { return _categoryViewModels; } set { SetProperty(ref _categoryViewModels, value); } }
         public ICollectionView CategoryView { get { return _categoryView; } }
+        public decimal Total { get { return _total; } set { SetProperty(ref _total, value); } }
 
         private void SetUpCategories(Office office, IEnumerable<Expense> expenses)
         {

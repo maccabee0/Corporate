@@ -23,17 +23,15 @@ namespace Corporate.Expenditures.ViewModels
         private DelegateCommand _reviewByCategoryCommand;
         public ObservableCollection<OfficeTotalsViewModel> OfficeTotalsViewModels { get; set; }
         public InteractionRequest<INotification> CategoryListRequest { get; set; }
+        public ExpenseTotalsViewModel ExpenseTotalsViewModel { get; set; }
         private ICollectionView _officeTotalsView;
 
-        public ReviewViewModel()
-        {
-            var list = new List<Office> { };
-        }
-
-        public ReviewViewModel(IOfficeRepository repository, IEnumerable<Expense> expenses)
+        public ReviewViewModel(IOfficeRepository repository,IExpenseRepository expenseRepository)
         {
             _officeRepository = repository;
+            var expenses = expenseRepository.GetExpencesBy(e => true);
             var list = _officeRepository.GetOfficesBy(o => true).Select(office => new OfficeTotalsViewModel(office, expenses)).ToList();
+            ExpenseTotalsViewModel=new ExpenseTotalsViewModel(expenses);
             OfficeTotalsViewModels = new ObservableCollection<OfficeTotalsViewModel>(list);
             OfficeTotalsView.Refresh();
             CategoryListRequest = new InteractionRequest<INotification>();
