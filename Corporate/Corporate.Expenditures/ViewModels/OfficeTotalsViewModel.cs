@@ -37,8 +37,9 @@ namespace Corporate.Expenditures.ViewModels
         {
             foreach (var expense in expenses)
             {
+                var id = expense.Expenseid;
                 CategoryViewModels.Add(new CategoryViewModel(expense.Expenseid, expense.Name,
-                                                office.Logs.Where(l => l.Expenseid == expense.Expenseid)
+                                                office.Logs.Where(l => l.Expenseid == id)
                                                       .Sum(l => l.Amount)));
             }
             

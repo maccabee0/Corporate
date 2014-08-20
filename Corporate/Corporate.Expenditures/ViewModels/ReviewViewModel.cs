@@ -26,19 +26,19 @@ namespace Corporate.Expenditures.ViewModels
         public ExpenseTotalsViewModel ExpenseTotalsViewModel { get; set; }
         private ICollectionView _officeTotalsView;
 
-        public ReviewViewModel(IOfficeRepository repository,IExpenseRepository expenseRepository)
+        public ReviewViewModel(IOfficeRepository repository, IExpenseRepository expenseRepository)
         {
             _officeRepository = repository;
             var expenses = expenseRepository.GetExpencesBy(e => true);
             var list = _officeRepository.GetOfficesBy(o => true).Select(office => new OfficeTotalsViewModel(office, expenses)).ToList();
-            ExpenseTotalsViewModel=new ExpenseTotalsViewModel(expenses);
+            ExpenseTotalsViewModel = new ExpenseTotalsViewModel(expenses);
             OfficeTotalsViewModels = new ObservableCollection<OfficeTotalsViewModel>(list);
-            OfficeTotalsView.Refresh();
+            _officeTotalsView = new CollectionView(OfficeTotalsViewModels);
             CategoryListRequest = new InteractionRequest<INotification>();
         }
 
         public Office CurrentOffice { get { return OfficeTotalsView.CurrentItem as Office; } }
-        public ICollectionView OfficeTotalsView { get { return new CollectionView(OfficeTotalsViewModels); } }
+        public ICollectionView OfficeTotalsView { get { return _officeTotalsView; } }
         public DelegateCommand MainPageCommand { get { return _mainPageCommand ?? (_mainPageCommand = new DelegateCommand(MainPage)); } }
         public DelegateCommand ReviewByCategoryCommand { get { return _reviewByCategoryCommand ?? (_reviewByCategoryCommand = new DelegateCommand(ReviewByCategory)); } }
 
@@ -52,9 +52,9 @@ namespace Corporate.Expenditures.ViewModels
 
         private void ReviewByCategory()
         {
-            var expense = new Expense { Expenseid = 1, Name = "Other" };
-            var listView = new CategoryListViewModel(CurrentOffice.Name, expense.Name, CurrentOffice.Logs.Where(l => l.Expenseid == expense.Expenseid));
-            CategoryListRequest.Raise(new Notification { Content = listView, Title = CurrentOffice.Name });
+            //var expense = new Expense { Expenseid = 1, Name = "Other" };
+            //var listView = new CategoryListViewModel(CurrentOffice.Name, expense.Name, CurrentOffice.Logs.Where(l => l.Expenseid == expense.Expenseid));
+            //CategoryListRequest.Raise(new Notification { Content = listView, Title = CurrentOffice.Name });
         }
 
         public void OnNavigatedTo(NavigationContext navigationContext)

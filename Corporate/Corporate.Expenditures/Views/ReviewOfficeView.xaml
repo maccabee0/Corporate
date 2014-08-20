@@ -60,35 +60,27 @@
                 <Label Grid.Column="0" Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}">Category</Label>
                 <Label Grid.Column="1" Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}">Total</Label>
             </Grid>
-            <ListBox Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Categories}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="{Binding Category}"/>
-                            <TextBlock Grid.Column="1" Text="{Binding Total}"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+            <ListView Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Categories}">
+                <ListView.View>
+                    <GridView ColumnHeaderContainerStyle="{StaticResource CategoryTotalsList}">
+                        <GridViewColumn DisplayMemberBinding="{Binding Category}"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Total}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
             <Grid Grid.Column="1" Grid.Row="0">
                 <Label Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}">Office Expences:</Label>
             </Grid>
-            <ListBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding ExpenseLogs}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding InputDate, StringFormat=dd/mm/yyyy}"></TextBlock>
-                            <TextBlock Text="{Binding Expense.Name}"></TextBlock>
-                            <TextBlock Text="{Binding Amount}"></TextBlock>
-                            <TextBlock Text="{Binding Description}"></TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+            <ListView Grid.Column="1" Grid.Row="1" ItemsSource="{Binding ExpenseLogs}">
+                <ListView.View>
+                    <GridView ColumnHeaderContainerStyle="{StaticResource CategoryTotalsList}">
+                        <GridViewColumn DisplayMemberBinding="{Binding InputDate, StringFormat=dd/mm/yyyy}"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Expense.Name}"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Amount}"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Description}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>

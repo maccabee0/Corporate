@@ -18,7 +18,7 @@ using Microsoft.Practices.Prism.Regions;
 
 namespace Corporate.Expenditures.ViewModels
 {
-    public class ReviewOfficeViewModel : BindableBase, INavigationAware,IRegionMemberLifetime
+    public class ReviewOfficeViewModel : BindableBase, INavigationAware, IRegionMemberLifetime
     {
         private int _officeId;
         private string _officeLocal;
@@ -37,9 +37,10 @@ namespace Corporate.Expenditures.ViewModels
         {
             _expenseRepository = expenseRepository;
             _expenseLogRepository = expenseLogRepository;
-            ExpenseLogs = new ObservableCollection<Expense_Log>(_expenseLogRepository.GetLogsByOffice(1));
+            ExpenseLogs = new ObservableCollection<Expense_Log>(_expenseLogRepository.GetLogsByOffice(1).OrderByDescending(l => l.InputDate));
             _expenseLogView = new CollectionView(ExpenseLogs);
             EditExpenseRequest = new InteractionRequest<EditExpenseNotification>();
+            Categories = new ObservableCollection<CategoryViewModel>();
         }
 
         public string OfficeLocal { get { return _officeLocal; } set { SetProperty(ref _officeLocal, value); } }
@@ -61,6 +62,15 @@ namespace Corporate.Expenditures.ViewModels
             }
         }
 
+        private void AddExpenseToLists(Expense_Log expense)
+        {
+            ExpenseLogs.Insert(0, expense);
+            var categoryViewModel = Categories.FirstOrDefault(c => c.Id == expense.Expenseid);
+            if (categoryViewModel != null)
+                categoryViewModel.Total += expense.Amount;
+            ExpenseLogView.Refresh();
+        }
+
         private void AddNewExpense()
         {
             var notification = new EditExpenseNotification(_officeId, OfficeLocal)
@@ -72,10 +82,11 @@ namespace Corporate.Expenditures.ViewModels
             EditExpenseRequest.Raise(notification,
                 returned =>
                 {
-                    if (returned != null && returned.Confirmed && returned.Amount != 0 && returned.SelectedExpenseId != 0)
-                    {
-                        _expenseLogRepository.SaveLog(CreateExpenseLog(returned));
-                    }
+                    if (returned == null || !returned.Confirmed || returned.Amount == 0 ||
+                        returned.SelectedExpenseId == 0) return;
+                    var expense = CreateExpenseLog(returned);
+                    _expenseLogRepository.SaveLog(expense);
+                    AddExpenseToLists(expense);
                 });
         }
 
@@ -102,19 +113,30 @@ namespace Corporate.Expenditures.ViewModels
             _officeId = id;
             OfficeLocal = officeLocal;
             ExpenseLogs = new ObservableCollection<Expense_Log>(_expenseLogRepository.GetLogsByOffice(id));
+            Categories = new ObservableCollection<CategoryViewModel>();
+            foreach (var expense in _expenseRepository.Expenses)
+            {
+                var eid = expense.Expenseid;
+                Categories.Add(new CategoryViewModel(eid, expense.Name, _expenseLogRepository
+                    .GetLogsBy(l => l.Expenseid == eid && l.Officeid == id).Sum(l => l.Amount)));
+            }
+
         }
 
         private void EditExpense()
         {
-            var notification = new EditExpenseNotification(CurrentExpense);
-            notification.Expenses = _expenseRepository.GetExpencesBy(e => true);
+            var notification = new EditExpenseNotification(CurrentExpense)
+                {
+                    Expenses = _expenseRepository.GetExpencesBy(e => true)
+                };
             EditExpenseRequest.Raise(notification,
                 returned =>
                 {
-                    if (returned != null && returned.Confirmed && returned.Amount != 0 && returned.SelectedExpenseId != 0)
-                    {
-                        _expenseLogRepository.SaveLog(CreateExpenseLog(returned));
-                    }
+                    if (returned == null || !returned.Confirmed || returned.Amount == 0 ||
+                        returned.SelectedExpenseId == 0) return;
+                    var expense = CreateExpenseLog(returned);
+                    _expenseLogRepository.SaveLog(expense);
+                    AddExpenseToLists(expense);
                 });
         }
 
@@ -122,7 +144,7 @@ namespace Corporate.Expenditures.ViewModels
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             var id = int.Parse(navigationContext.Parameters[ExpenditureKeys.OfficeId].ToString());
-            var local = (string)navigationContext.Parameters[ExpenditureKeys.OfficeLocal];
+            var local = navigationContext.Parameters[ExpenditureKeys.OfficeLocal] as string;
             GetOfficeExpenseLogs(id, local);
             _navigationJournal = navigationContext.NavigationService.Journal;
         }

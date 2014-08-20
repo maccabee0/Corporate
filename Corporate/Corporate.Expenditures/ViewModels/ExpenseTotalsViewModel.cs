@@ -23,7 +23,7 @@ namespace Corporate.Expenditures.ViewModels
 
         public void Update(IEnumerable<Expense> expenses)
         {
-            foreach (var expense in expenses)
+            foreach (var expense in expenses.OrderBy(e=>e.Expenseid))
             {
                 var total = expense.Logs.Sum(l=>l.Amount);
                 CategoryViewModels.Add(new CategoryViewModel(expense.Expenseid,expense.Name,total));

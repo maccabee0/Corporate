@@ -6,7 +6,6 @@
              xmlns:prism="http://www.codeplex.com/prism"
              xmlns:views="clr-namespace:Corporate.Expenditures.Views"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:viewModels="clr-namespace:Corporate.Expenditures.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="526" d:DesignWidth="768">
     <UserControl.Resources>
@@ -41,22 +40,29 @@
                 <Label Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}" HorizontalAlignment="Center" VerticalAlignment="Center">Company</Label>
                 <Label Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}" HorizontalAlignment="Center" VerticalAlignment="Center">Totals</Label>
             </StackPanel>
-
         </Grid>
-        <ListView Grid.Row="1" ItemsSource="{Binding OfficeTotalsViewModels}">
-            <ListView.View>
+        <ListView Grid.Row="1" ItemsSource="{Binding OfficeTotalsViewModels}" ItemTemplate="{StaticResource OfficeTotalsTemplate}">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel></StackPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <!--<ListView.View>
                 <GridView>
                     <GridViewColumn Header="Office" DisplayMemberBinding="{Binding OfficeLocal}"/>
-                    <GridViewColumn Header=""></GridViewColumn>
+                    <GridViewColumn Header="Office Total" DisplayMemberBinding="{Binding Total}"></GridViewColumn>
                 </GridView>
-            </ListView.View>
+            </ListView.View>-->
         </ListView>
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="2" DataContext="{Binding ExpenseTotalsViewModel}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/><ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="*"/><ColumnDefinition Width="4*"/><ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}">Totals:</Label>
-            <StackPanel Grid.Column="1" DataContext="{Binding ExpenseTotalsViewModel}" Orientation="Horizontal"></StackPanel>
+            <StackPanel Grid.Column="1" DataContext="{Binding CategoryViewModels}" Orientation="Horizontal">
+                <TextBlock Text="{Binding Total}" Foreground="{StaticResource TextBrush}" Margin="10" FontSize="{StaticResource LabelFontSize}"></TextBlock>
+            </StackPanel>
+            <TextBlock Grid.Column="2" Text="{Binding Total}" Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}"></TextBlock>
         </Grid>
     </Grid>
 </UserControl>

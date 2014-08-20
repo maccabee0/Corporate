@@ -12,7 +12,7 @@
     <!--<UserControl.DataContext>
         <viewModels:EditViewModel/>
     </UserControl.DataContext>-->
-    <Grid Background="{StaticResource MainBackground}">
+    <Grid Background="{StaticResource MainBackground}" DataContext="{Binding Notification}">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="40"/>
@@ -29,7 +29,7 @@
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" FontSize="30" FontWeight="ExtraBold" Foreground="White">Office:</TextBlock>
-            <TextBlock Grid.Column="1" FontSize="30" FontWeight="ExtraBold" Foreground="White" Text="{Binding Notification.OfficeLocal}"></TextBlock>
+            <TextBlock Grid.Column="1" FontSize="30" FontWeight="ExtraBold" Foreground="White" Text="{Binding OfficeLocal}"></TextBlock>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -37,20 +37,19 @@
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" FontSize="24" FontWeight="Bold" Foreground="White">Category:</TextBlock>
-            <ComboBox Grid.Column="1" Margin="5" FontSize="24" 
-                      ItemsSource="{Binding Path=Notification.Expenses}"
+            <ComboBox Grid.Column="1" Margin="2" FontSize="24" 
+                      ItemsSource="{Binding Path=Expenses}"
                       DisplayMemberPath="Name"
                       SelectedValuePath="Expenseid"
-                      SelectedValue="{Binding Notification.SelectedExpenseId, Mode=TwoWay}"></ComboBox>
+                      SelectedValue="{Binding SelectedExpenseId, Mode=TwoWay}"></ComboBox>
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="12*"/>
-                <ColumnDefinition Width="7*"/>
-                <ColumnDefinition Width="11*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" Foreground="White" FontSize="25" FontWeight="Bold">Amount:</TextBlock>
-            <TextBox Grid.Column="1" Margin="5" FontSize="23" Text="{Binding Notification.Amount,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,StringFormat=f2}" Grid.ColumnSpan="2"></TextBox>
+            <TextBox Grid.Column="1" Margin="2"  FontSize="23" Text="{Binding Amount,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,StringFormat=f2}" ></TextBox>
         </Grid>
         <Grid Grid.Row="3">
             <Grid.RowDefinitions>
@@ -67,7 +66,6 @@
                 <ColumnDefinition Width="75"/>
                 <ColumnDefinition Width="85"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="1" Margin="5" Command="{Binding SaveAddCommand}">Save Add Another</Button>
             <Button Grid.Column="2" Margin="5" Command="{Binding SaveCommand}">Save</Button>
             <Button Grid.Column="3" Margin="5" Command="{Binding CancelCommand}">Cancel</Button>
         </Grid>

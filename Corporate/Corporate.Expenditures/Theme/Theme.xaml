@@ -4,8 +4,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModel="clr-namespace:Corporate.Expenditures.ViewModels"
     mc:Ignorable="d">
-
 
     <!--Basic Brushes-->
     <Color x:Key="PrimaryColor">#FF696969</Color>
@@ -15,6 +15,8 @@
     <SolidColorBrush x:Key="TextBrush" Color="WhiteSmoke"/>
     <SolidColorBrush x:Key="ListBoxBackground" Color="Transparent"/>
     <SolidColorBrush x:Key="ListBoxSelectedBackgroundBrush" Color="Gray"/>
+    
+    <!--MainBackground-->
     <LinearGradientBrush x:Key="MainBackground" StartPoint="0.5,0" EndPoint="0.5,1">
         <GradientStop Color="SkyBlue" Offset="0"/>
         <GradientStop Color="SteelBlue" Offset="0.5"/>
@@ -41,7 +43,8 @@
             <TextBlock Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}">Back To Main</TextBlock>
         </StackPanel>
     </ControlTemplate>
-    <!--ListBov-->
+    
+    <!--ListBox-->
     <Style TargetType="{x:Type ListBox}">
         <Setter Property="Background" Value="{StaticResource ListBoxBackground}"/>
         <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
@@ -75,10 +78,43 @@
             <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
         </Style.Resources>
     </Style>
+    
     <!--ListView-->
     <Style TargetType="{x:Type ListView}">
         <Setter Property="Background" Value="{StaticResource ListBoxBackground}"/>
         <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
         <Setter Property="FontSize" Value="{StaticResource ListBoxFontSize}"/>
     </Style>
+    
+    <Style TargetType="{x:Type GridViewColumnHeader}">
+        <Setter Property="IsEnabled" Value="False"/>
+    </Style>
+    
+    <Style TargetType="GridViewColumnHeader" x:Key="CategoryTotalsList">
+        <Setter Property="Visibility" Value="Collapsed"/>
+    </Style>
+    
+    <Style TargetType="{x:Type ListViewItem}">
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Background" Value="{StaticResource TextBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+        <Style.Resources>
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/> 
+        </Style.Resources>
+    </Style>
+
+    <DataTemplate x:Key="OfficeTotalsTemplate" DataType="{x:Type viewModel:OfficeTotalsViewModel}">
+        <Grid >
+            <TextBlock Text="{Binding OfficeLocal}"></TextBlock>
+            <StackPanel Orientation="Horizontal" DataContext="{Binding CategoryViewModels}">
+                <TextBlock Text="{Binding Total}"></TextBlock>
+            </StackPanel>
+            <TextBlock Text="{Binding Total}"></TextBlock>
+        </Grid>
+    </DataTemplate>
+
 </ResourceDictionary>
