@@ -9,6 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Corporate.Expenditures.CustomControls;
 using Corporate.Expenditures.ViewModels;
 using System;
 using System.Diagnostics;

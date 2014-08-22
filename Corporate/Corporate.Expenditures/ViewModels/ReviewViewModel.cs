@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 using System.Windows.Data;
+using System.Windows.Input;
 
 using Corporate.Domain.Entities;
+using Corporate.Expenditures.DataMatrix;
 using Corporate.Interfaces.Repositories;
 
 using Microsoft.Practices.Prism.Commands;
@@ -17,28 +20,21 @@ namespace Corporate.Expenditures.ViewModels
 {
     public class ReviewViewModel : BindableBase, INavigationAware, IRegionMemberLifetime
     {
-        private IOfficeRepository _officeRepository;
         private IRegionNavigationJournal _navigationJournal;
         private DelegateCommand _mainPageCommand;
         private DelegateCommand _reviewByCategoryCommand;
-        public ObservableCollection<OfficeTotalsViewModel> OfficeTotalsViewModels { get; set; }
+        public ObservableCollection<RowViewModel> Rows { get; set; }
+        public event EventHandler<MouseButtonEventArgs> MouseDoubleClick;
         public InteractionRequest<INotification> CategoryListRequest { get; set; }
-        public ExpenseTotalsViewModel ExpenseTotalsViewModel { get; set; }
-        private ICollectionView _officeTotalsView;
 
         public ReviewViewModel(IOfficeRepository repository, IExpenseRepository expenseRepository)
         {
-            _officeRepository = repository;
             var expenses = expenseRepository.GetExpencesBy(e => true);
-            var list = _officeRepository.GetOfficesBy(o => true).Select(office => new OfficeTotalsViewModel(office, expenses)).ToList();
-            ExpenseTotalsViewModel = new ExpenseTotalsViewModel(expenses);
-            OfficeTotalsViewModels = new ObservableCollection<OfficeTotalsViewModel>(list);
-            _officeTotalsView = new CollectionView(OfficeTotalsViewModels);
+            var offices = repository.GetOfficesBy(o => true);
+            Rows = SetRows(offices, expenses);
             CategoryListRequest = new InteractionRequest<INotification>();
         }
 
-        public Office CurrentOffice { get { return OfficeTotalsView.CurrentItem as Office; } }
-        public ICollectionView OfficeTotalsView { get { return _officeTotalsView; } }
         public DelegateCommand MainPageCommand { get { return _mainPageCommand ?? (_mainPageCommand = new DelegateCommand(MainPage)); } }
         public DelegateCommand ReviewByCategoryCommand { get { return _reviewByCategoryCommand ?? (_reviewByCategoryCommand = new DelegateCommand(ReviewByCategory)); } }
 
@@ -60,7 +56,7 @@ namespace Corporate.Expenditures.ViewModels
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             _navigationJournal = navigationContext.NavigationService.Journal;
-            OfficeTotalsView.Refresh();
+            //OfficeTotalsView.Refresh();
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -74,5 +70,26 @@ namespace Corporate.Expenditures.ViewModels
         }
 
         public bool KeepAlive { get { return true; } }
+
+        private ObservableCollection<RowViewModel> SetRows(IEnumerable<Office> offices, IEnumerable<Expense> expenses)
+        {
+            var rows = new ObservableCollection<RowViewModel>();
+            var exp = expenses.OrderBy(e => e.Expenseid).ToList();
+            foreach (var office in offices)
+            {
+                RowViewModel row = new RowViewModel();
+                row.Columns.Add(new ColumnViewModel("Office", office.Name));
+                foreach (var expense in exp)
+                {
+                    var total = expense.Logs.Where(l => l.Officeid == office.Officeid).Sum(l => l.Amount);
+                    row.Columns.Add(new ColumnViewModel(expense.Name, new TotalsCellViewModel(office.Officeid, expense.Expenseid, total)));
+                }
+                row.Columns.Add(new ColumnViewModel("Total", office.Logs.Sum(l => l.Amount)));
+                rows.Add(row);
+            }
+            return rows;
+        }
+
+        public void OnMouseDoubleClick(object sender, MouseButtonEventArgs e) { }
     }
 }

@@ -82,6 +82,15 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomControls\CellDataSelector.cs" />
+    <Compile Include="CustomControls\ExtendedListView.cs" />
+    <Compile Include="CustomControls\Utils.cs" />
+    <Compile Include="DataMatrix\DataMatrix.cs" />
+    <Compile Include="DataMatrix\DataMatrixCellTemplateSelectorWrapper.cs" />
+    <Compile Include="DataMatrix\ExtendedDataMatrix.cs" />
+    <Compile Include="DataMatrix\IDataMatrix.cs" />
+    <Compile Include="DataMatrix\MatrixColumn.cs" />
+    <Compile Include="ViewModels\ColumnViewModel.cs" />
     <Compile Include="ExpenditureKeys.cs" />
     <Compile Include="ExpenditureModule.cs" />
     <Compile Include="Notifications\EditExpenseNotification.cs" />
@@ -91,9 +100,10 @@
     <Compile Include="ViewModels\EditViewModel.cs" />
     <Compile Include="ViewModels\ExpenseTotalsViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\OfficeTotalsViewModel.cs" />
     <Compile Include="ViewModels\ReviewOfficeViewModel.cs" />
     <Compile Include="ViewModels\ReviewViewModel.cs" />
+    <Compile Include="ViewModels\RowViewModel.cs" />
+    <Compile Include="ViewModels\TotalsCellViewModel.cs" />
     <Compile Include="Views\CategoryListView.xaml.cs">
       <DependentUpon>CategoryListView.xaml</DependentUpon>
     </Compile>

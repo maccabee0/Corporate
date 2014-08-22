@@ -52,14 +52,14 @@
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0" Grid.Row="0">
+            <!--<Grid Grid.Column="0" Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}">Category</Label>
                 <Label Grid.Column="1" Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}">Total</Label>
-            </Grid>
+            </Grid>-->
             <ListView Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Categories}">
                 <ListView.View>
                     <GridView ColumnHeaderContainerStyle="{StaticResource CategoryTotalsList}">

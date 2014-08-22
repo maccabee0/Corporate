@@ -5,6 +5,7 @@
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModel="clr-namespace:Corporate.Expenditures.ViewModels"
+    xmlns:ext="clr-namespace:Corporate.Expenditures.CustomControls"
     mc:Ignorable="d">
 
     <!--Basic Brushes-->
@@ -15,7 +16,7 @@
     <SolidColorBrush x:Key="TextBrush" Color="WhiteSmoke"/>
     <SolidColorBrush x:Key="ListBoxBackground" Color="Transparent"/>
     <SolidColorBrush x:Key="ListBoxSelectedBackgroundBrush" Color="Gray"/>
-    
+
     <!--MainBackground-->
     <LinearGradientBrush x:Key="MainBackground" StartPoint="0.5,0" EndPoint="0.5,1">
         <GradientStop Color="SkyBlue" Offset="0"/>
@@ -25,6 +26,7 @@
 
     <sys:Double x:Key="ListBoxFontSize">20</sys:Double>
     <sys:Double x:Key="LabelFontSize">30</sys:Double>
+    <ext:CellDataSelector x:Key="CellDataSelector" />
 
     <LinearGradientBrush x:Key="ButtonBrush" StartPoint="0,0.5" EndPoint="1,0.5">
         <GradientStop Color="MidnightBlue" Offset="0"/>
@@ -43,7 +45,7 @@
             <TextBlock Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}">Back To Main</TextBlock>
         </StackPanel>
     </ControlTemplate>
-    
+
     <!--ListBox-->
     <Style TargetType="{x:Type ListBox}">
         <Setter Property="Background" Value="{StaticResource ListBoxBackground}"/>
@@ -78,22 +80,22 @@
             <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
         </Style.Resources>
     </Style>
-    
+
     <!--ListView-->
     <Style TargetType="{x:Type ListView}">
         <Setter Property="Background" Value="{StaticResource ListBoxBackground}"/>
         <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
         <Setter Property="FontSize" Value="{StaticResource ListBoxFontSize}"/>
     </Style>
-    
+
     <Style TargetType="{x:Type GridViewColumnHeader}">
         <Setter Property="IsEnabled" Value="False"/>
     </Style>
-    
+
     <Style TargetType="GridViewColumnHeader" x:Key="CategoryTotalsList">
         <Setter Property="Visibility" Value="Collapsed"/>
     </Style>
-    
+
     <Style TargetType="{x:Type ListViewItem}">
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="True">
@@ -103,18 +105,41 @@
             </Trigger>
         </Style.Triggers>
         <Style.Resources>
-            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/> 
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
         </Style.Resources>
     </Style>
 
-    <DataTemplate x:Key="OfficeTotalsTemplate" DataType="{x:Type viewModel:OfficeTotalsViewModel}">
-        <Grid >
-            <TextBlock Text="{Binding OfficeLocal}"></TextBlock>
-            <StackPanel Orientation="Horizontal" DataContext="{Binding CategoryViewModels}">
-                <TextBlock Text="{Binding Total}"></TextBlock>
-            </StackPanel>
-            <TextBlock Text="{Binding Total}"></TextBlock>
-        </Grid>
-    </DataTemplate>
+    <!--ExtendedListView-->
+    <Style TargetType="{x:Type ext:ExtendedListView}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+        <Setter Property="FontSize" Value="{StaticResource LabelFontSize}"/>
+    </Style>
+
+    <Style x:Key="TotalsTemplate" TargetType="GridViewColumnHeader">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontSize" Value="{StaticResource LabelFontSize}"/>
+        <Setter Property="FontWeight" Value="ExtraBold"/>
+        <Setter Property="MinWidth" Value="100"></Setter>
+    </Style>
+
+    <!--TotalsDataGridStyling-->
+    <ControlTemplate x:Key="TotalsDataGridControlTemplate" TargetType="{x:Type DataGrid}" >
+        <ControlTemplate.Resources>
+            <!--<Style TargetType="DataGrid">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="FontSize" Value="{StaticResource ListBoxFontSize}"/>
+            </Style>-->
+            <Style TargetType="DataGridColumnHeader">
+                <Setter Property="FontSize" Value="{StaticResource LabelFontSize}"/>
+                <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
+                <Setter Property="Background" Value="{StaticResource SecondaryColor}"/>
+            </Style>
+            <Style TargetType="{x:Type DataGridRow}">
+                <Setter Property="Foreground" Value="{StaticResource SecondaryColor}"/>
+                <Setter Property="FontSize" Value="{StaticResource ListBoxFontSize}"/>
+            </Style>
+        </ControlTemplate.Resources>
+    </ControlTemplate>
 
 </ResourceDictionary>
