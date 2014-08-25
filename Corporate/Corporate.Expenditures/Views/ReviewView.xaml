@@ -42,8 +42,15 @@
                 <Label Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}" HorizontalAlignment="Center" VerticalAlignment="Center">Totals</Label>
             </StackPanel>
         </Grid>
-        <DataGrid Name="totalsDataGrid" Grid.Row="1" ItemsSource="{Binding Rows}" AutoGenerateColumns="False" ColumnWidth="*" GridLinesVisibility="Horizontal" Background="Transparent">
+        <DataGrid Name="totalsDataGrid" Grid.Row="1" ItemsSource="{Binding Rows}" AutoGenerateColumns="False" 
+                  ColumnWidth="*" GridLinesVisibility="Horizontal" Background="Transparent" IsReadOnly="True" MouseDown="DataGridCellMouseDoubleClick"
+                  CanUserAddRows="False">
             <DataGrid.Resources>
+                <DataTemplate DataType="{x:Type DataGridCell}">
+                    <StackPanel DataContext="{Binding TotalsCellViewModel}" MouseDown="DataGridCellMouseDoubleClick">
+                        <TextBlock Text="{Binding Text}" MouseDown="DataGridCellMouseDoubleClick"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="FontSize" Value="{StaticResource ListBoxFontSize}"/>
                     <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"></Setter>
@@ -55,26 +62,7 @@
                 </Style>
             </DataGrid.Resources>
         </DataGrid>
-        <!--<ext:ExtendedListView Grid.Row="1" MatrixSource="{Binding Matrix}" MouseDoubleClick="ExtendedListView_MouseDoubleClick" 
-                              HorizontalContentAlignment="Stretch" CellTemplateSelector="{StaticResource CellDataSelector}">
-            <ListView.View>
-                <GridView/>
-            </ListView.View>
-        </ext:ExtendedListView>-->
-        <!--<ListView Grid.Row="1" ItemsSource="{Binding OfficeTotalsViewModels}" ItemTemplate="{StaticResource OfficeTotalsTemplate}">
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel></StackPanel>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Office" DisplayMemberBinding="{Binding OfficeLocal}"/>
-                    <GridViewColumn Header="Office Total" DisplayMemberBinding="{Binding Total}"></GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>-->
-        <Grid Grid.Row="2" DataContext="{Binding ExpenseTotalsViewModel}">
+        <!--<Grid Grid.Row="2" DataContext="{Binding ExpenseTotalsViewModel}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="4*"/>
@@ -85,6 +73,6 @@
                 <TextBlock Text="{Binding Total}" Foreground="{StaticResource TextBrush}" Margin="10" FontSize="{StaticResource LabelFontSize}"></TextBlock>
             </StackPanel>
             <TextBlock Grid.Column="2" Text="{Binding Total}" Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}"></TextBlock>
-        </Grid>
+        </Grid>-->
     </Grid>
 </UserControl>

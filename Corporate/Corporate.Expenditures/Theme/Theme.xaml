@@ -110,11 +110,6 @@
     </Style>
 
     <!--ExtendedListView-->
-    <Style TargetType="{x:Type ext:ExtendedListView}">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
-        <Setter Property="FontSize" Value="{StaticResource LabelFontSize}"/>
-    </Style>
 
     <Style x:Key="TotalsTemplate" TargetType="GridViewColumnHeader">
         <Setter Property="Background" Value="Transparent"/>
@@ -126,10 +121,6 @@
     <!--TotalsDataGridStyling-->
     <ControlTemplate x:Key="TotalsDataGridControlTemplate" TargetType="{x:Type DataGrid}" >
         <ControlTemplate.Resources>
-            <!--<Style TargetType="DataGrid">
-                <Setter Property="Background" Value="Transparent"/>
-                <Setter Property="FontSize" Value="{StaticResource ListBoxFontSize}"/>
-            </Style>-->
             <Style TargetType="DataGridColumnHeader">
                 <Setter Property="FontSize" Value="{StaticResource LabelFontSize}"/>
                 <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
@@ -141,5 +132,11 @@
             </Style>
         </ControlTemplate.Resources>
     </ControlTemplate>
+
+    <DataTemplate DataType="{x:Type DataGridTemplateColumn}" x:Key="TotalsDataTemplate">
+        <StackPanel DataContext="{Binding TotalsCellViewModel}">
+            <TextBlock Text="{Binding Text}"></TextBlock>
+        </StackPanel>
+    </DataTemplate>
 
 </ResourceDictionary>

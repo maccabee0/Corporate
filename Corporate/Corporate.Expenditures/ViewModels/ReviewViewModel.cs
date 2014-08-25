@@ -8,7 +8,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 
 using Corporate.Domain.Entities;
-using Corporate.Expenditures.DataMatrix;
+using Corporate.Expenditures.CorporateEventArgs;
 using Corporate.Interfaces.Repositories;
 
 using Microsoft.Practices.Prism.Commands;
@@ -24,7 +24,6 @@ namespace Corporate.Expenditures.ViewModels
         private DelegateCommand _mainPageCommand;
         private DelegateCommand _reviewByCategoryCommand;
         public ObservableCollection<RowViewModel> Rows { get; set; }
-        public event EventHandler<MouseButtonEventArgs> MouseDoubleClick;
         public InteractionRequest<INotification> CategoryListRequest { get; set; }
 
         public ReviewViewModel(IOfficeRepository repository, IExpenseRepository expenseRepository)
@@ -78,18 +77,21 @@ namespace Corporate.Expenditures.ViewModels
             foreach (var office in offices)
             {
                 RowViewModel row = new RowViewModel();
-                row.Columns.Add(new ColumnViewModel("Office", office.Name));
+                row.Columns.Add(new ColumnViewModel("Office",new TotalsCellViewModel(office.Officeid,0,office.Name)));
                 foreach (var expense in exp)
                 {
                     var total = expense.Logs.Where(l => l.Officeid == office.Officeid).Sum(l => l.Amount);
-                    row.Columns.Add(new ColumnViewModel(expense.Name, new TotalsCellViewModel(office.Officeid, expense.Expenseid, total)));
+                    row.Columns.Add(new ColumnViewModel(expense.Name, new TotalsCellViewModel(office.Officeid, expense.Expenseid, total.ToString())));
                 }
-                row.Columns.Add(new ColumnViewModel("Total", office.Logs.Sum(l => l.Amount)));
+                row.Columns.Add(new ColumnViewModel("Total", new TotalsCellViewModel(office.Officeid,0,office.Logs.Sum(l => l.Amount).ToString())));
                 rows.Add(row);
             }
             return rows;
         }
 
-        public void OnMouseDoubleClick(object sender, MouseButtonEventArgs e) { }
+        public void OnMouseItemSelected(object sender, ItemSelectedEventArgs e)
+        {
+            var item = e.Item;
+        }
     }
 }

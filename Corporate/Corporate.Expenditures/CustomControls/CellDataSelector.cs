@@ -12,9 +12,9 @@ namespace Corporate.Expenditures.CustomControls
     {
         public override DataTemplate SelectTemplate(object item, System.Windows.DependencyObject container)
         {
-            var control = Utils.GetFirstParentForChild<UserControl>(container);
+            var control = Utils.GetFirstParentForChild<DataGrid>(container);
 
-            var resource = "";
+            var resource = "CellTemplate";
 
             return (DataTemplate) control.FindResource(resource);
         }
