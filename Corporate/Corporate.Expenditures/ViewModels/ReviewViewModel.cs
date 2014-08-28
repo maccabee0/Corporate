@@ -35,7 +35,7 @@ namespace Corporate.Expenditures.ViewModels
         }
 
         public DelegateCommand MainPageCommand { get { return _mainPageCommand ?? (_mainPageCommand = new DelegateCommand(MainPage)); } }
-        public DelegateCommand ReviewByCategoryCommand { get { return _reviewByCategoryCommand ?? (_reviewByCategoryCommand = new DelegateCommand(ReviewByCategory)); } }
+        public ICommand ReviewByCategoryCommand { get { return _reviewByCategoryCommand ?? (_reviewByCategoryCommand = new DelegateCommand(ReviewByCategory)); } }
 
         private void MainPage()
         {
@@ -47,7 +47,7 @@ namespace Corporate.Expenditures.ViewModels
 
         private void ReviewByCategory()
         {
-            //var expense = new Expense { Expenseid = 1, Name = "Other" };
+            var expense = new Expense { Expenseid = 1, Name = "Other" };
             //var listView = new CategoryListViewModel(CurrentOffice.Name, expense.Name, CurrentOffice.Logs.Where(l => l.Expenseid == expense.Expenseid));
             //CategoryListRequest.Raise(new Notification { Content = listView, Title = CurrentOffice.Name });
         }
@@ -74,9 +74,10 @@ namespace Corporate.Expenditures.ViewModels
         {
             var rows = new ObservableCollection<RowViewModel>();
             var exp = expenses.OrderBy(e => e.Expenseid).ToList();
+            RowViewModel row;
             foreach (var office in offices)
             {
-                RowViewModel row = new RowViewModel();
+                row = new RowViewModel();
                 row.Columns.Add(new ColumnViewModel("Office",new TotalsCellViewModel(office.Officeid,0,office.Name)));
                 foreach (var expense in exp)
                 {
@@ -86,6 +87,14 @@ namespace Corporate.Expenditures.ViewModels
                 row.Columns.Add(new ColumnViewModel("Total", new TotalsCellViewModel(office.Officeid,0,office.Logs.Sum(l => l.Amount).ToString())));
                 rows.Add(row);
             }
+            row = new RowViewModel();
+            row.Columns.Add(new ColumnViewModel("Office",new TotalsCellViewModel(0,0,"Totals")));
+            foreach (var expense in exp)
+            {
+                row.Columns.Add(new ColumnViewModel(expense.Name,new TotalsCellViewModel(0,expense.Expenseid,expense.Logs.Where(l=>l.Expenseid==expense.Expenseid).Sum(l=>l.Amount).ToString())));
+            }
+            row.Columns.Add(new ColumnViewModel("Total",new TotalsCellViewModel(0,0,exp.Sum(e=>e.Logs.Sum(l=>l.Amount)).ToString())));
+            rows.Add(row);
             return rows;
         }
 
