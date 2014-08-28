@@ -55,12 +55,12 @@ namespace Corporate.Expenditures.Views
             if (!rowViewModels.Any()) return;
             var record = rowViewModels.First();
             var columns = record.Columns.Select((x, i) => new { Name = x.Name, Index = i }).ToList();
-            var template = (DataTemplate)totalsDataGrid.FindResource("TotalsDataTemplate");
+            var template = (DataTemplate)totalsDataGrid.FindResource("ButtonTemplate");
             foreach (var column in columns)
             {
                 var binding = new Binding(string.Format("Columns[{0}].Value", column.Index));
-                //var col = new DataGridTemplateColumn { Header = column.Name, CellTemplate = template, DisplayIndex = column.Index };
-                totalsDataGrid.Columns.Add(new DataGridTextColumn { Header = column.Name, Binding = binding });
+                var col = new DataGridTemplateColumn { Header = column.Name, CellTemplate = template, DisplayIndex = column.Index };
+                totalsDataGrid.Columns.Add(col);//new DataGridTextColumn { Header = column.Name, Binding = binding });
             }
         }
 

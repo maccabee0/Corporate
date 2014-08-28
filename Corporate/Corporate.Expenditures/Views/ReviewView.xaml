@@ -60,11 +60,11 @@
                     <StackPanel><Button Command="{Binding DataContext.ReviewByCategoryCommand,RelativeSource={RelativeSource AncestorType=UserControl}}" Content="{Binding Path=Text}"></Button></StackPanel>
                     
                 </DataTemplate>-->
-                <DataTemplate DataType="{x:Type DataGridCell}">
+                <!--<DataTemplate DataType="{x:Type DataGridCell}">
                     <StackPanel DataContext="{Binding TotalsCellViewModel}">
-                        <!--MouseDoubleClick="DataGridCellMouseDoubleClick" Command="{Binding ReviewByCategoryCommand}"
+                        MouseDoubleClick="DataGridCellMouseDoubleClick" Command="{Binding ReviewByCategoryCommand}"
                                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=StackPanel},Path=DataContext}"
-                        <Button Command="{Binding DataContext.ReviewByCategoryCommand,RelativeSource={RelativeSource AncestorType=UserControl}}" Content="{Binding Text}"></Button>-->
+                       
                         <TextBlock Text="{Binding Text}" Foreground="{StaticResource SeconaryBrush}" FontSize="{StaticResource ListBoxFontSize}">
                             <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Click">
@@ -74,6 +74,9 @@
                         </TextBlock>
                         
                     </StackPanel>
+                </DataTemplate> -->
+                <DataTemplate DataType="{x:Type DataGridColumn}" x:Key="ButtonTemplate">
+                        <Button Content="{Binding}" Command="{Binding DataContext.ReviewByCategoryCommand, Source={StaticResource DataContextProxy}}" ></Button>
                 </DataTemplate>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="FontSize" Value="{StaticResource ListBoxFontSize}"/>
@@ -85,7 +88,7 @@
                     <Setter Property="FontSize" Value="20"/>
                 </Style>
             </DataGrid.Resources>
-            
+
         </DataGrid>
         <!--<Grid Grid.Row="2" DataContext="{Binding ExpenseTotalsViewModel}">
             <Grid.ColumnDefinitions>
