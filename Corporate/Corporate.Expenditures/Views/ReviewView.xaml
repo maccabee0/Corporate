@@ -43,7 +43,7 @@
             </StackPanel>
         </Grid>
         <DataGrid Name="totalsDataGrid" Grid.Row="1" ItemsSource="{Binding Rows}" AutoGenerateColumns="False" 
-                  ColumnWidth="*" GridLinesVisibility="Horizontal" Background="Transparent" IsReadOnly="True" 
+                  ColumnWidth="*" GridLinesVisibility="Horizontal" Background="Transparent" IsReadOnly="True"  
                   CanUserAddRows="False">
             <i:Interaction.Behaviors>
                 <ext:DataContextProxyBehavior />
@@ -76,7 +76,7 @@
                     </StackPanel>
                 </DataTemplate> -->
                 <DataTemplate DataType="{x:Type DataGridColumn}" x:Key="ButtonTemplate">
-                        <Button Content="{Binding}" Command="{Binding DataContext.ReviewByCategoryCommand, Source={StaticResource DataContextProxy}}" ></Button>
+                        <Button Content="{Binding}" Command="{Binding DataSource.ReviewByCategoryCommand, Source={StaticResource DataContextProxy}}" ></Button>
                 </DataTemplate>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="FontSize" Value="{StaticResource ListBoxFontSize}"/>
