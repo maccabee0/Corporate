@@ -20,33 +20,11 @@ namespace Corporate.Expenditures.Views
     /// </summary>
     public partial class ReviewView : UserControl
     {
-        public event EventHandler<ItemSelectedEventArgs> ItemSelected;
         public ReviewView(IUnityContainer container)
         {
             InitializeComponent();
             DataContext = container.Resolve<ReviewViewModel>();
-            ItemSelected += ((ReviewViewModel)DataContext).OnMouseItemSelected;
             SetDataGridColumns(((ReviewViewModel)DataContext).Rows);
-        }
-
-        private void DataGridCellMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            var origin = (TextBlock) e.OriginalSource;
-            var stack = (StackPanel)origin.Parent;
-            var item = stack.DataContext as TotalsCellViewModel;
-            if (item != null && item.ExpenseId != 0)
-            {
-                OnDoubleClick(new ItemSelectedEventArgs(item));
-            }
-        }
-
-        private void OnDoubleClick(ItemSelectedEventArgs e)
-        {
-            var temp = Interlocked.CompareExchange(ref ItemSelected, null, null);
-            if (temp != null)
-            {
-                temp(this, e);
-            }
         }
 
         private void SetDataGridColumns(IEnumerable<RowViewModel> records)
@@ -56,14 +34,24 @@ namespace Corporate.Expenditures.Views
             var record = rowViewModels.First();
             var columns = record.Columns.Select((x, i) => new { Name = x.Name, Index = i }).ToList();
             var template = (DataTemplate)totalsDataGrid.FindResource("ButtonTemplate");
+            
             foreach (var column in columns)
             {
-                var binding = new Binding(string.Format("Columns[{0}].Value", column.Index));
-                var col = new DataGridTemplateColumn { Header = column.Name, CellTemplate = template, DisplayIndex = column.Index };
-                totalsDataGrid.Columns.Add(col);//new DataGridTextColumn { Header = column.Name, Binding = binding });
+                DataGridColumn col;
+                if (column.Name == "Office"||column.Name =="Total")
+                {
+                    col=new DataGridTextColumn { Header = column.Name, Binding = new Binding(string.Format("Columns[{0}].Value", column.Index)) };
+                }
+                else{
+                    var binding = new Binding(string.Format("Columns[{0}].Value", column.Index));
+                    col = new CustomBoundColumn { 
+                        Header = column.Name,
+                        TemplateName = "ButtonTemplate", 
+                        Binding = binding
+                    };                    
+                }                
+                totalsDataGrid.Columns.Add(col);
             }
         }
-
-        
     }
 }

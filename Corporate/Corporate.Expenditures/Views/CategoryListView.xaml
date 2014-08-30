@@ -25,7 +25,7 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" Foreground="White" FontWeight="ExtraBold" FontSize="29" Margin="5">Office:</TextBlock>
-            <TextBlock Grid.Column="1" Foreground="White" FontWeight="DemiBold" FontSize="29" Margin="5" Text="{Binding Office}">Place Holder</TextBlock>
+            <TextBlock Grid.Column="1" Foreground="White" FontWeight="DemiBold" FontSize="29" Margin="5" Text="{Binding Office}"></TextBlock>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -33,7 +33,7 @@
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" Foreground="White" FontWeight="ExtraBold" FontSize="24" Margin="5">Category:</TextBlock>
-            <TextBlock Grid.Column="1" Foreground="White" FontWeight="DemiBold" FontSize="24" Margin="5" Text="{Binding Category}">Place Holder</TextBlock>
+            <TextBlock Grid.Column="1" Foreground="White" FontWeight="DemiBold" FontSize="24" Margin="5" Text="{Binding Category}"></TextBlock>
         </Grid>
         <ListView Grid.Row="2" ItemsSource="{Binding Logs}">
             <ListView.View>

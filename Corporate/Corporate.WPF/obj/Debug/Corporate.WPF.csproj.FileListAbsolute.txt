@@ -171,3 +171,7 @@ E:\Users\Maccabee\Documents\GitRepo\Corporate\Corporate\Corporate.WPF\obj\Debug\
 E:\Users\Maccabee\Documents\GitRepo\Corporate\Corporate\Corporate.WPF\obj\Debug\Corporate.WPF.g.resources
 E:\Users\Maccabee\Documents\GitRepo\Corporate\Corporate\Corporate.WPF\obj\Debug\Corporate.WPF.Properties.Resources.resources
 E:\Users\Maccabee\Documents\GitRepo\Corporate\Corporate\Corporate.WPF\obj\Debug\Corporate.WPF.csproj.GenerateResource.Cache
+D:\GitRepos\Corporate\Corporate\Corporate.WPF\bin\Debug\Corporate.Expenditures.dll
+D:\GitRepos\Corporate\Corporate\Corporate.WPF\bin\Debug\Corporate.Expenditures.pdb
+D:\GitRepos\Corporate\Corporate\Corporate.WPF\obj\Debug\Theme\Theme.baml
+D:\GitRepos\Corporate\Corporate\Corporate.WPF\obj\Debug\App.baml

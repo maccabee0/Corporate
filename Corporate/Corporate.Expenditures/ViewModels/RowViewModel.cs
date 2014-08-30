@@ -10,16 +10,21 @@ namespace Corporate.Expenditures.ViewModels
     public class RowViewModel
     {
         public string Office { get; set; }
-        public ObservableCollection<ColumnViewModel> Columns { get; set; }
+        public List<ColumnViewModel> Columns { get; set; }
 
         public RowViewModel()
         {
-            Columns=new ObservableCollection<ColumnViewModel>();
+            Columns = new List<ColumnViewModel>();
         }
 
         public RowViewModel(IEnumerable<ColumnViewModel> models)
         {
-            Columns=new ObservableCollection<ColumnViewModel>(models);
+            Columns = new List<ColumnViewModel>(models);
+        }
+
+        public override string ToString()
+        {
+            return "RowViewModel: " + Office;
         }
     }
 }

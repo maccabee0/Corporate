@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:prism="http://www.codeplex.com/prism"
         xmlns:regions="clr-namespace:Corporate.Domain;assembly=Corporate.Domain"
-        Title="Expendeture Reporting" Height="768" Width="1024" >
+        Title="Expendeture Reporting" Height="768" Width="1024" WindowState="Maximized">
     <Grid Background="{StaticResource MainBackground}" >
         <Label HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10,10" Foreground="{StaticResource TextBrush}" FontSize="50">Corporation</Label>
         <ContentControl prism:RegionManager.RegionName="{x:Static regions:RegionNames.MainRegion}">

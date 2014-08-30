@@ -21,21 +21,32 @@ namespace Corporate.Expenditures.ViewModels
     public class ReviewViewModel : BindableBase, INavigationAware, IRegionMemberLifetime
     {
         private IRegionNavigationJournal _navigationJournal;
+        private IOfficeRepository _officeRepository;
         private DelegateCommand _mainPageCommand;
-        private DelegateCommand _reviewByCategoryCommand;
+        private DelegateCommand<TotalsCellViewModel> _reviewByCategoryCommand;
         public ObservableCollection<RowViewModel> Rows { get; set; }
         public InteractionRequest<INotification> CategoryListRequest { get; set; }
+        public InteractionRequest<INotification> ExpensesNotFoundRequest { get; set; }
 
         public ReviewViewModel(IOfficeRepository repository, IExpenseRepository expenseRepository)
         {
+            _officeRepository = repository;
             var expenses = expenseRepository.GetExpencesBy(e => true);
-            var offices = repository.GetOfficesBy(o => true);
+            var offices = _officeRepository.GetOfficesBy(o => true);
             Rows = SetRows(offices, expenses);
             CategoryListRequest = new InteractionRequest<INotification>();
+            ExpensesNotFoundRequest = new InteractionRequest<INotification>();
         }
 
-        public DelegateCommand MainPageCommand { get { return _mainPageCommand ?? (_mainPageCommand = new DelegateCommand(MainPage)); } }
-        public ICommand ReviewByCategoryCommand { get { return _reviewByCategoryCommand ?? (_reviewByCategoryCommand = new DelegateCommand(ReviewByCategory)); } }
+        public DelegateCommand MainPageCommand
+        {
+            get { return _mainPageCommand ?? (_mainPageCommand = new DelegateCommand(MainPage)); }
+        }
+        public ICommand ReviewByCategoryCommand
+        {
+            get { return _reviewByCategoryCommand ?? (_reviewByCategoryCommand = new DelegateCommand<TotalsCellViewModel>(ReviewByCategory)); }
+        }
+        public bool KeepAlive { get { return false; } }
 
         private void MainPage()
         {
@@ -45,11 +56,29 @@ namespace Corporate.Expenditures.ViewModels
             }
         }
 
-        private void ReviewByCategory()
+        private void ReviewByCategory(TotalsCellViewModel viewModel)
         {
-            var expense = new Expense { Expenseid = 1, Name = "Other" };
-            //var listView = new CategoryListViewModel(CurrentOffice.Name, expense.Name, CurrentOffice.Logs.Where(l => l.Expenseid == expense.Expenseid));
-            //CategoryListRequest.Raise(new Notification { Content = listView, Title = CurrentOffice.Name });
+            if (viewModel.OfficeId != 0)
+            {
+                var office = _officeRepository.GetOfficeById(viewModel.OfficeId);
+                if (office.Logs.Any(l => l.Expenseid == viewModel.ExpenseId))
+                {
+                    var expense = office.Logs.FirstOrDefault(l => l.Expenseid == viewModel.ExpenseId).Expense;
+                    var listView = new CategoryListViewModel(office.Name, expense.Name, office.Logs.Where(l => l.Expenseid == expense.Expenseid));
+                    CategoryListRequest.Raise(new Notification { Content = listView, Title = office.Name });
+                }
+                else
+                {
+                    RaiseNotification(string.Format("No Expenses of the select type where found for {0}.", office.Name));
+                }
+            }
+        }
+
+        private void RaiseNotification(string message) 
+        {
+            this.ExpensesNotFoundRequest.Raise(
+               new Notification { Content = message, Title = "Notification" },
+               n => {  });
         }
 
         public void OnNavigatedTo(NavigationContext navigationContext)
@@ -68,8 +97,6 @@ namespace Corporate.Expenditures.ViewModels
             //throw new NotImplementedException();
         }
 
-        public bool KeepAlive { get { return true; } }
-
         private ObservableCollection<RowViewModel> SetRows(IEnumerable<Office> offices, IEnumerable<Expense> expenses)
         {
             var rows = new ObservableCollection<RowViewModel>();
@@ -78,29 +105,24 @@ namespace Corporate.Expenditures.ViewModels
             foreach (var office in offices)
             {
                 row = new RowViewModel();
-                row.Columns.Add(new ColumnViewModel("Office",new TotalsCellViewModel(office.Officeid,0,office.Name)));
+                row.Columns.Add(new ColumnViewModel("Office", office.Name));
                 foreach (var expense in exp)
                 {
                     var total = expense.Logs.Where(l => l.Officeid == office.Officeid).Sum(l => l.Amount);
                     row.Columns.Add(new ColumnViewModel(expense.Name, new TotalsCellViewModel(office.Officeid, expense.Expenseid, total.ToString())));
                 }
-                row.Columns.Add(new ColumnViewModel("Total", new TotalsCellViewModel(office.Officeid,0,office.Logs.Sum(l => l.Amount).ToString())));
+                row.Columns.Add(new ColumnViewModel("Total", office.Logs.Sum(l => l.Amount)));
                 rows.Add(row);
             }
             row = new RowViewModel();
-            row.Columns.Add(new ColumnViewModel("Office",new TotalsCellViewModel(0,0,"Totals")));
+            row.Columns.Add(new ColumnViewModel("Office", "Totals"));
             foreach (var expense in exp)
             {
-                row.Columns.Add(new ColumnViewModel(expense.Name,new TotalsCellViewModel(0,expense.Expenseid,expense.Logs.Where(l=>l.Expenseid==expense.Expenseid).Sum(l=>l.Amount).ToString())));
+                row.Columns.Add(new ColumnViewModel(expense.Name, new TotalsCellViewModel(0, expense.Expenseid, expense.Logs.Where(l => l.Expenseid == expense.Expenseid).Sum(l => l.Amount).ToString())));
             }
-            row.Columns.Add(new ColumnViewModel("Total",new TotalsCellViewModel(0,0,exp.Sum(e=>e.Logs.Sum(l=>l.Amount)).ToString())));
+            row.Columns.Add(new ColumnViewModel("Total", exp.Sum(e => e.Logs.Sum(l => l.Amount))));
             rows.Add(row);
             return rows;
-        }
-
-        public void OnMouseItemSelected(object sender, ItemSelectedEventArgs e)
-        {
-            var item = e.Item;
         }
     }
 }
