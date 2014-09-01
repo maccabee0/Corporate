@@ -36,7 +36,6 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <!--<Button Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20" Template="{StaticResource BackButton}" Command="{Binding MainPageCommand}"></Button>-->
             <Button Grid.Column="0" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource TextBrush}" Command="{Binding MainPageCommand}">Back to Main</Button>
             <StackPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10">
                 <TextBlock Foreground="{StaticResource TextBrush}" FontSize="20">Office:</TextBlock>
@@ -52,35 +51,41 @@
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
-            <!--<Grid Grid.Column="0" Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}">Category</Label>
-                <Label Grid.Column="1" Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}">Total</Label>
-            </Grid>-->
-            <ListView Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Categories}">
+            <DataGrid Grid.Column="0" Grid.Row="1" ColumnWidth="*" ItemsSource="{Binding Categories}" AutoGenerateColumns="False" HeadersVisibility="None">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Category}"/>
+                    <DataGridTextColumn Binding="{Binding Total}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <!--<ListView Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Categories}">
                 <ListView.View>
                     <GridView ColumnHeaderContainerStyle="{StaticResource CategoryTotalsList}">
                         <GridViewColumn DisplayMemberBinding="{Binding Category}"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Total}"/>
                     </GridView>
                 </ListView.View>
-            </ListView>
+            </ListView>-->
             <Grid Grid.Column="1" Grid.Row="0">
                 <Label Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}">Office Expences:</Label>
             </Grid>
-            <ListView Grid.Column="1" Grid.Row="1" ItemsSource="{Binding ExpenseLogs}">
+            <!--<ListView Grid.Column="1" Grid.Row="1" ItemsSource="{Binding ExpenseLogs}" >
                 <ListView.View>
                     <GridView ColumnHeaderContainerStyle="{StaticResource CategoryTotalsList}">
-                        <GridViewColumn DisplayMemberBinding="{Binding InputDate, StringFormat=dd/mm/yyyy}"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding InputDate, StringFormat=dd/mm/yyyy}" />
                         <GridViewColumn DisplayMemberBinding="{Binding Expense.Name}"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Amount}"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Description}"/>
                     </GridView>
                 </ListView.View>
-            </ListView>
+            </ListView>-->
+            <DataGrid Grid.Column="1" Grid.Row="1" ItemsSource="{Binding ExpenseLogs}" ColumnWidth="*" HeadersVisibility="None" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding InputDate,StringFormat=dd/MM/yyyy}"/>
+                    <DataGridTextColumn Binding="{Binding Expense.Name}"/>
+                    <DataGridTextColumn Binding="{Binding Amount}"/>
+                    <DataGridTextColumn Binding="{Binding Description}"/>
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>

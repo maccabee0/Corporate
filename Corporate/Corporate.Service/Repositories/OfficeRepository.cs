@@ -58,7 +58,5 @@ namespace Corporate.Service.Repositories
         {
             Context.Offices.Remove(office);
         }
-
-
     }
 }

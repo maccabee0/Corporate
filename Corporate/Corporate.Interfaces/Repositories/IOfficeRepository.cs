@@ -9,7 +9,6 @@ namespace Corporate.Interfaces.Repositories
 {
     public interface IOfficeRepository
     {
-
         IQueryable<Office> Offices { get; }
         IEnumerable<Office> GetOfficesBy(Expression<Func<Office, bool>> predicate);
         Office GetOfficeById(int id);

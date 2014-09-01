@@ -12,7 +12,7 @@
     <Color x:Key="PrimaryColor">#FF696969</Color>
     <Color x:Key="SecondaryColor">#FFD3D3D3</Color>
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}"/>
-    <SolidColorBrush x:Key="SeconaryBrush" Color="{StaticResource SecondaryColor}"/>
+    <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource SecondaryColor}"/>
     <SolidColorBrush x:Key="TextBrush" Color="WhiteSmoke"/>
     <SolidColorBrush x:Key="ListBoxBackground" Color="Transparent"/>
     <SolidColorBrush x:Key="ListBoxSelectedBackgroundBrush" Color="Gray"/>
@@ -26,7 +26,6 @@
 
     <sys:Double x:Key="ListBoxFontSize">20</sys:Double>
     <sys:Double x:Key="LabelFontSize">30</sys:Double>
-    <ext:CellDataSelector x:Key="CellDataSelector" />
 
     <LinearGradientBrush x:Key="ButtonBrush" StartPoint="0,0.5" EndPoint="1,0.5">
         <GradientStop Color="MidnightBlue" Offset="0"/>
@@ -73,7 +72,7 @@
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Foreground" Value="Black"/>
                 <Setter Property="FontWeight" Value="Bold"/>
-                <Setter Property="Background" Value="{StaticResource TextBrush}"/>
+                <Setter Property="Background" Value="Transparent"/>
             </Trigger>
         </Style.Triggers>
         <Style.Resources>
@@ -101,7 +100,6 @@
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Foreground" Value="Black"/>
                 <Setter Property="FontWeight" Value="Bold"/>
-                <Setter Property="Background" Value="{StaticResource TextBrush}"/>
             </Trigger>
         </Style.Triggers>
         <Style.Resources>
@@ -109,34 +107,38 @@
         </Style.Resources>
     </Style>
 
-    <!--ExtendedListView-->
-
-    <Style x:Key="TotalsTemplate" TargetType="GridViewColumnHeader">
+    <Style TargetType="DataGrid">
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="FontSize" Value="{StaticResource LabelFontSize}"/>
-        <Setter Property="FontWeight" Value="ExtraBold"/>
-        <Setter Property="MinWidth" Value="100"></Setter>
+        <Setter Property="ColumnWidth" Value="*"/>
+        <Setter Property="CanUserAddRows" Value="False"/>
+        <Setter Property="CanUserReorderColumns" Value="False"/>
+        <Setter Property="AutoGenerateColumns" Value="False"/>
+        <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+        <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="CanUserSortColumns" Value="False"/>
     </Style>
 
-    <!--TotalsDataGridStyling-->
-    <ControlTemplate x:Key="TotalsDataGridControlTemplate" TargetType="{x:Type DataGrid}" >
-        <ControlTemplate.Resources>
-            <Style TargetType="DataGridColumnHeader">
-                <Setter Property="FontSize" Value="{StaticResource LabelFontSize}"/>
-                <Setter Property="Foreground" Value="{StaticResource PrimaryColor}"/>
-                <Setter Property="Background" Value="{StaticResource SecondaryColor}"/>
-            </Style>
-            <Style TargetType="{x:Type DataGridRow}">
-                <Setter Property="Foreground" Value="{StaticResource SecondaryColor}"/>
-                <Setter Property="FontSize" Value="{StaticResource ListBoxFontSize}"/>
-            </Style>
-        </ControlTemplate.Resources>
-    </ControlTemplate>
+    <Style TargetType="DataGridColumnHeader">
+        <Setter Property="FontSize" Value="{StaticResource LabelFontSize}"/>
+        <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
+        <Setter Property="Background" Value="{StaticResource SecondaryBrush}"/>
+    </Style>
 
-    <DataTemplate DataType="{x:Type DataGridTemplateColumn}" x:Key="TotalsDataTemplate">
-        <StackPanel DataContext="{Binding TotalsCellViewModel}">
-            <TextBlock Text="{Binding Text}"></TextBlock>
-        </StackPanel>
-    </DataTemplate>
+    <Style TargetType="{x:Type DataGridRow}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource SecondaryBrush}"/>
+        <Setter Property="FontSize" Value="{StaticResource ListBoxFontSize}"/>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="FontWeight" Value="Bold"/>                
+            </Trigger>
+        </Style.Triggers>
+        <Style.Resources>
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+        </Style.Resources>
+    </Style>
+    <!--</ControlTemplate.Resources>
+    </ControlTemplate>-->
 
 </ResourceDictionary>

@@ -112,15 +112,22 @@ namespace Corporate.Expenditures.ViewModels
         {
             _officeId = id;
             OfficeLocal = officeLocal;
-            ExpenseLogs = new ObservableCollection<Expense_Log>(_expenseLogRepository.GetLogsByOffice(id));
-            Categories = new ObservableCollection<CategoryViewModel>();
-            foreach (var expense in _expenseRepository.Expenses)
+            var logs = _expenseLogRepository.GetLogsByOffice(id);
+            ExpenseLogs = new ObservableCollection<Expense_Log>(logs);
+            //var log = logs.Select(l=>new CategoryViewModel(l.Expenseid,l.Expense.Name,
+            var cats = _expenseRepository.Expenses.Select(e => new CategoryViewModel
             {
-                var eid = expense.Expenseid;
-                Categories.Add(new CategoryViewModel(eid, expense.Name, _expenseLogRepository
-                    .GetLogsBy(l => l.Expenseid == eid && l.Officeid == id).Sum(l => l.Amount)));
-            }
-
+                Id = e.Expenseid,
+                Category = e.Name,
+                Total = logs.Any(l => l.Expenseid == e.Expenseid && l.Officeid == _officeId) ? logs.Where(l => l.Expenseid == e.Expenseid && l.Officeid == _officeId).Sum(l => l.Amount) : 0
+            }).ToList();
+            Categories = new ObservableCollection<CategoryViewModel>(cats);
+            //foreach (var expense in _expenseRepository.Expenses)
+            //{
+            //    var eid = expense.Expenseid;
+            //    Categories.Add(new CategoryViewModel(eid, expense.Name, logs.Where(l => l.Expenseid == expense.Expenseid).Sum(l => l.Amount)));
+            //}
+            OfficeTotal = logs.Sum(l => l.Amount);
         }
 
         private void EditExpense()

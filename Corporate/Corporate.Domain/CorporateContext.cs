@@ -15,7 +15,6 @@ namespace Corporate.Domain
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            //throw new UnintentionalCodeFirstException();
         }
 
         public DbSet<Office> Offices { set; get; }

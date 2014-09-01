@@ -84,10 +84,8 @@
   <ItemGroup>
     <Compile Include="Behaviors\DataContextProxyBehavior.cs" />
     <Compile Include="CorporateEventArgs\ItemSelectedEventArgs.cs" />
-    <Compile Include="CustomControls\CellDataSelector.cs" />
     <Compile Include="CustomControls\DataContextProxy.cs" />
     <Compile Include="CustomControls\CustomBoundColumn.cs" />
-    <Compile Include="CustomControls\Utils.cs" />
     <Compile Include="ViewModels\ColumnViewModel.cs" />
     <Compile Include="ExpenditureKeys.cs" />
     <Compile Include="ExpenditureModule.cs" />
