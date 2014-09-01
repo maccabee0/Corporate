@@ -42,10 +42,12 @@ namespace Corporate.Expenditures.ViewModels
         {
             get { return _mainPageCommand ?? (_mainPageCommand = new DelegateCommand(MainPage)); }
         }
+
         public ICommand ReviewByCategoryCommand
         {
-            get { return _reviewByCategoryCommand ?? (_reviewByCategoryCommand = new DelegateCommand<TotalsCellViewModel>(ReviewByCategory)); }
+            get { return _reviewByCategoryCommand ?? (_reviewByCategoryCommand = new DelegateCommand<TotalsCellViewModel>(ReviewByCategory,CanReviewByCategory)); }
         }
+
         public bool KeepAlive { get { return false; } }
 
         private void MainPage()
@@ -54,6 +56,11 @@ namespace Corporate.Expenditures.ViewModels
             {
                 _navigationJournal.GoBack();
             }
+        }
+
+        private bool CanReviewByCategory(TotalsCellViewModel viewModel)
+        {
+            return viewModel.ExpenseId != 0 && viewModel.OfficeId != 0 && viewModel.Text != "0";
         }
 
         private void ReviewByCategory(TotalsCellViewModel viewModel)
@@ -84,7 +91,6 @@ namespace Corporate.Expenditures.ViewModels
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             _navigationJournal = navigationContext.NavigationService.Journal;
-            //OfficeTotalsView.Refresh();
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -94,7 +100,6 @@ namespace Corporate.Expenditures.ViewModels
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
-            //throw new NotImplementedException();
         }
 
         private ObservableCollection<RowViewModel> SetRows(IEnumerable<Office> offices, IEnumerable<Expense> expenses)

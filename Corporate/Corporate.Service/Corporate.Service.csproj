@@ -89,7 +89,6 @@
     <Compile Include="Repositories\ExceptionRepository.cs" />
     <Compile Include="Repositories\ExpenseLogRepository.cs" />
     <Compile Include="Repositories\ExpenseRepository.cs" />
-    <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Repositories\OfficeRepository.cs" />
     <Compile Include="ServiceModule.cs" />
   </ItemGroup>

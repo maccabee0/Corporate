@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:viewModels="clr-namespace:Corporate.Expenditures.ViewModels"
              mc:Ignorable="d" 
-             Height="300" Width="300">
+             Height="350" Width="350">
     <UserControl.Resources>
         <ResourceDictionary Source="../Theme/Theme.xaml"/>
     </UserControl.Resources>
@@ -23,21 +23,21 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" FontSize="30" FontWeight="ExtraBold" Foreground="White">Office:</TextBlock>
-            <TextBlock Grid.Column="1" FontSize="30" FontWeight="ExtraBold" Foreground="White" Text="{Binding Notification.OfficeLocal}"></TextBlock>
+            <TextBlock Grid.Column="0" FontSize="28" FontWeight="ExtraBold" Foreground="White" Margin="10,5">Office:</TextBlock>
+            <TextBlock Grid.Column="1" FontSize="28" FontWeight="ExtraBold" Foreground="White" Margin="10,5" Text="{Binding Notification.OfficeLocal}"></TextBlock>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" FontSize="24" FontWeight="Bold" Foreground="White">Category:</TextBlock>
-            <ComboBox Grid.Column="1" Margin="2" FontSize="24" 
+            <TextBlock Grid.Column="0" FontSize="22" FontWeight="Bold" Foreground="White" Margin="10,3">Category:</TextBlock>
+            <ComboBox Grid.Column="1" Margin="10,3" FontSize="22" 
                       ItemsSource="{Binding Path=Notification.Expenses}"
                       DisplayMemberPath="Name"
                       SelectedValuePath="Expenseid"
@@ -48,16 +48,16 @@
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Foreground="White" FontSize="25" FontWeight="Bold">Amount:</TextBlock>
-            <TextBox Grid.Column="1" Margin="2"  FontSize="23" Text="{Binding Notification.Amount,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,StringFormat=f2}" ></TextBox>
+            <TextBlock Grid.Column="0" Foreground="White" FontSize="22" FontWeight="Bold" Margin="10,3">Amount:</TextBlock>
+            <TextBox Grid.Column="1" Margin="10,3"  FontSize="21" Text="{Binding Notification.Amount,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,StringFormat=f2}" ></TextBox>
         </Grid>
         <Grid Grid.Row="3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" FontSize="25" FontWeight="Bold" Foreground="White">Note:</TextBlock>
-            <TextBox Grid.Row="1" Margin="5" Text="{Binding Notification.Note,Mode=TwoWay}"></TextBox>
+            <TextBlock Grid.Row="0" FontSize="25" FontWeight="Bold" Foreground="White" Margin="10,3">Note:</TextBlock>
+            <TextBox Grid.Row="1" Margin="10,0" Text="{Binding Notification.Note,Mode=TwoWay}" ></TextBox>
         </Grid>
         <Grid Grid.Row="4" >
             <Grid.ColumnDefinitions>

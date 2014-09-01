@@ -4,8 +4,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModel="clr-namespace:Corporate.Expenditures.ViewModels"
-    xmlns:ext="clr-namespace:Corporate.Expenditures.CustomControls"
     mc:Ignorable="d">
 
     <!--Basic Brushes-->
@@ -106,7 +104,8 @@
             <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
         </Style.Resources>
     </Style>
-
+    
+    <!--DataGrid-->
     <Style TargetType="DataGrid">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="ColumnWidth" Value="*"/>
@@ -119,7 +118,7 @@
     </Style>
 
     <Style TargetType="DataGridColumnHeader">
-        <Setter Property="FontSize" Value="{StaticResource LabelFontSize}"/>
+        <Setter Property="FontSize" Value="{StaticResource ListBoxFontSize}"/>
         <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
         <Setter Property="Background" Value="{StaticResource SecondaryBrush}"/>
     </Style>
@@ -138,7 +137,15 @@
             <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
         </Style.Resources>
     </Style>
-    <!--</ControlTemplate.Resources>
-    </ControlTemplate>-->
+
+    <Style x:Key="DataGridButton" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{StaticResource SecondaryBrush}"></Setter>
+        <Setter Property="Background" Value="Transparent"/>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="Transparent"></Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
 </ResourceDictionary>

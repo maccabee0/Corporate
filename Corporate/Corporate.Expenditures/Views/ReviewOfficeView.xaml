@@ -11,7 +11,7 @@
              d:DesignHeight="526" d:DesignWidth="768">
     <i:Interaction.Triggers>
         <prism:InteractionRequestTrigger SourceObject="{Binding EditExpenseRequest}">
-            <prism:PopupWindowAction>
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
                 <prism:PopupWindowAction.WindowContent>
                     <views:EditView/>
                 </prism:PopupWindowAction.WindowContent>
@@ -21,9 +21,6 @@
     <UserControl.Resources>
         <ResourceDictionary Source="../Theme/Theme.xaml"/>
     </UserControl.Resources>
-    <!--UserControl.DataContext>
-        <viewModels:ReviewOfficeViewModel/>
-    </UserControl.DataContext>-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
@@ -36,10 +33,10 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource TextBrush}" Command="{Binding MainPageCommand}">Back to Main</Button>
+            <Button Grid.Column="0" FontSize="20" Margin="30" Command="{Binding MainPageCommand}">Back to Main</Button>
             <StackPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10">
-                <TextBlock Foreground="{StaticResource TextBrush}" FontSize="20">Office:</TextBlock>
-                <TextBlock Text="{Binding OfficeLocal}" Foreground="{StaticResource TextBrush}" FontSize="30"/>
+                <TextBlock Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}">Office:</TextBlock>
+                <TextBlock Text="{Binding OfficeLocal}" Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
@@ -57,27 +54,9 @@
                     <DataGridTextColumn Binding="{Binding Total}"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <!--<ListView Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Categories}">
-                <ListView.View>
-                    <GridView ColumnHeaderContainerStyle="{StaticResource CategoryTotalsList}">
-                        <GridViewColumn DisplayMemberBinding="{Binding Category}"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Total}"/>
-                    </GridView>
-                </ListView.View>
-            </ListView>-->
-            <Grid Grid.Column="1" Grid.Row="0">
+            <Grid Grid.Column="0" Grid.Row="0">
                 <Label Foreground="{StaticResource TextBrush}" FontSize="{StaticResource LabelFontSize}">Office Expences:</Label>
             </Grid>
-            <!--<ListView Grid.Column="1" Grid.Row="1" ItemsSource="{Binding ExpenseLogs}" >
-                <ListView.View>
-                    <GridView ColumnHeaderContainerStyle="{StaticResource CategoryTotalsList}">
-                        <GridViewColumn DisplayMemberBinding="{Binding InputDate, StringFormat=dd/mm/yyyy}" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Expense.Name}"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Amount}"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Description}"/>
-                    </GridView>
-                </ListView.View>
-            </ListView>-->
             <DataGrid Grid.Column="1" Grid.Row="1" ItemsSource="{Binding ExpenseLogs}" ColumnWidth="*" HeadersVisibility="None" AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding InputDate,StringFormat=dd/MM/yyyy}"/>
@@ -97,8 +76,8 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" FontSize="{StaticResource LabelFontSize}" Foreground="{StaticResource TextBrush}" >Total:</Label>
-                <TextBlock Grid.Column="2" Margin="10" Text="{Binding OfficeTotal}" FontSize="{StaticResource LabelFontSize}" Foreground="{StaticResource TextBrush}"></TextBlock>
+                <Label Grid.Column="0" Margin="10,3" FontSize="{StaticResource LabelFontSize}" Foreground="{StaticResource TextBrush}" >Total:</Label>
+                <TextBlock Grid.Column="2" Margin="10,3" Text="{Binding OfficeTotal}" FontSize="{StaticResource LabelFontSize}" Foreground="{StaticResource TextBrush}"></TextBlock>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.ColumnDefinitions>
@@ -106,8 +85,8 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="1" Margin="10" Command="{Binding EditExpenseCommand}">Edit Expense</Button>
-                <Button Grid.Column="2" Margin="10" Command="{Binding AddNewExpenseCommand}">Add Expense</Button>
+                <Button Grid.Column="1" Margin="10" FontSize="20" Command="{Binding EditExpenseCommand}">Edit Expense</Button>
+                <Button Grid.Column="2" Margin="10" FontSize="20" Command="{Binding AddNewExpenseCommand}">Add Expense</Button>
             </Grid>
         </Grid>
     </Grid>

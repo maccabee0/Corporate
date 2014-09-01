@@ -43,7 +43,6 @@
     <Compile Include="Repositories\IExpenseLogRepository.cs" />
     <Compile Include="Repositories\IExpenseRepository.cs" />
     <Compile Include="Repositories\IOfficeRepository.cs" />
-    <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
