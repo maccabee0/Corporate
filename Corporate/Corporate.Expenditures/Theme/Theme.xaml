@@ -104,7 +104,7 @@
             <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
         </Style.Resources>
     </Style>
-    
+
     <!--DataGrid-->
     <Style TargetType="DataGrid">
         <Setter Property="Background" Value="Transparent"/>
@@ -130,7 +130,7 @@
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Foreground" Value="Black"/>
-                <Setter Property="FontWeight" Value="Bold"/>                
+                <Setter Property="FontWeight" Value="Bold"/>
             </Trigger>
         </Style.Triggers>
         <Style.Resources>
@@ -142,8 +142,10 @@
         <Setter Property="Foreground" Value="{StaticResource SecondaryBrush}"></Setter>
         <Setter Property="Background" Value="Transparent"/>
         <Style.Triggers>
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Background" Value="Transparent"></Setter>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Background" Value="Red"></Setter>
+                <Setter Property="BorderBrush" Value="#AAA" />
+                <Setter Property="Foreground" Value="#888"/>
             </Trigger>
         </Style.Triggers>
     </Style>

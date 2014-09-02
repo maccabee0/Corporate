@@ -29,5 +29,10 @@ namespace Corporate.WPF
             moduleCatalog.AddModule(typeof(Service.ServiceModule));
             moduleCatalog.AddModule(typeof(Expenditures.ExpenditureModule));
         }
+
+        //protected override Microsoft.Practices.Prism.Logging.ILoggerFacade CreateLogger()
+        //{
+        //    return base.CreateContainer().Resolve<ILoggerFacade>();
+        //}
     }
 }
