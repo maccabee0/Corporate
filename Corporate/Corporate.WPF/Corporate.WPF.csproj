@@ -102,6 +102,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CorporateBootstrapper.cs" />
+    <Compile Include="CorporateLogger.cs" />
     <Compile Include="Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
@@ -142,6 +143,10 @@
     <ProjectReference Include="..\Corporate.Expenditures\Corporate.Expenditures.csproj">
       <Project>{ccf6bbbd-ba06-4ce4-8d85-83d44c08b9bb}</Project>
       <Name>Corporate.Expenditures</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Corporate.Interfaces\Corporate.Interfaces.csproj">
+      <Project>{ad3a7093-bda8-4516-bfb8-4a3c62df216b}</Project>
+      <Name>Corporate.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\Corporate.Service\Corporate.Service.csproj">
       <Project>{4d1125ca-c45c-4b96-bed3-0e19f84e12cd}</Project>

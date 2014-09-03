@@ -137,17 +137,21 @@
             <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
         </Style.Resources>
     </Style>
+    
+    <Style TargetType="{x:Type DataGridCell}">
+        <Setter Property="Background" Value="Transparent"/>
+    </Style>
 
     <Style x:Key="DataGridButton" TargetType="{x:Type Button}">
         <Setter Property="Foreground" Value="{StaticResource SecondaryBrush}"></Setter>
         <Setter Property="Background" Value="Transparent"/>
-        <Style.Triggers>
+        <!--<Style.Triggers>
             <Trigger Property="IsEnabled" Value="false">
                 <Setter Property="Background" Value="Red"></Setter>
                 <Setter Property="BorderBrush" Value="#AAA" />
                 <Setter Property="Foreground" Value="#888"/>
             </Trigger>
-        </Style.Triggers>
+        </Style.Triggers>-->
     </Style>
 
 </ResourceDictionary>

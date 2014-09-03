@@ -11,7 +11,7 @@ using Microsoft.Practices.Prism.Logging;
 
 namespace Corporate.Service.Repositories
 {
-    public class ExceptionRepository : IExceptionLogRepository,ILoggerFacade
+    public class ExceptionRepository : IExceptionLogRepository
     {
         private CorporateContext _context;
         //public ExceptionRepository() { _context = new CorporateContext(); }
@@ -52,17 +52,6 @@ namespace Corporate.Service.Repositories
         public void DeleteLog(ExceptionLog log)
         {
             _context.ExceptionLogs.Remove(log);
-        }
-
-        public void Log(string message, Category category, Priority priority)
-        {
-            var log = new ExceptionLog
-            {
-                ExceptionDate = DateTime.Now,
-                Details = message + category.GetType() + priority.GetType(),
-                Message = message
-            };
-            SaveLog(log);
-        }
+        }        
     }
 }

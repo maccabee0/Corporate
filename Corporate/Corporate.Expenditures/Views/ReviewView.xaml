@@ -13,9 +13,6 @@
         <ResourceDictionary Source="../Theme/Theme.xaml"/>
     </UserControl.Resources>
     <i:Interaction.Triggers>
-        <prism:InteractionRequestTrigger SourceObject="{Binding ExpensesNotFoundRequest}">
-            <prism:PopupWindowAction CenterOverAssociatedObject="True" IsModal="True"/>
-        </prism:InteractionRequestTrigger>
         <prism:InteractionRequestTrigger SourceObject="{Binding CategoryListRequest}">
             <prism:PopupWindowAction CenterOverAssociatedObject="True" IsModal="True">
                 <prism:PopupWindowAction.WindowContent>

@@ -15,6 +15,7 @@ using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Regions;
+using Microsoft.Practices.Prism.Logging;
 
 namespace Corporate.Expenditures.ViewModels
 {
@@ -22,20 +23,20 @@ namespace Corporate.Expenditures.ViewModels
     {
         private IRegionNavigationJournal _navigationJournal;
         private IOfficeRepository _officeRepository;
+        private ILoggerFacade _logger;
         private DelegateCommand _mainPageCommand;
         private DelegateCommand<TotalsCellViewModel> _reviewByCategoryCommand;
         public ObservableCollection<RowViewModel> Rows { get; set; }
         public InteractionRequest<INotification> CategoryListRequest { get; set; }
-        public InteractionRequest<INotification> ExpensesNotFoundRequest { get; set; }
 
-        public ReviewViewModel(IOfficeRepository repository, IExpenseRepository expenseRepository)
+        public ReviewViewModel(IOfficeRepository repository, IExpenseRepository expenseRepository,ILoggerFacade logger)
         {
             _officeRepository = repository;
             var expenses = expenseRepository.GetExpencesBy(e => true);
             var offices = _officeRepository.GetOfficesBy(o => true);
             Rows = SetRows(offices, expenses);
             CategoryListRequest = new InteractionRequest<INotification>();
-            ExpensesNotFoundRequest = new InteractionRequest<INotification>();
+            _logger = logger;
         }
 
         public DelegateCommand MainPageCommand
@@ -45,7 +46,7 @@ namespace Corporate.Expenditures.ViewModels
 
         public ICommand ReviewByCategoryCommand
         {
-            get { return _reviewByCategoryCommand ?? (_reviewByCategoryCommand = new DelegateCommand<TotalsCellViewModel>(ReviewByCategory,CanReviewByCategory)); }
+            get { return _reviewByCategoryCommand ?? (_reviewByCategoryCommand = new DelegateCommand<TotalsCellViewModel>(ReviewByCategory, CanReviewByCategory)); }
         }
 
         public bool KeepAlive { get { return false; } }
@@ -65,27 +66,17 @@ namespace Corporate.Expenditures.ViewModels
 
         private void ReviewByCategory(TotalsCellViewModel viewModel)
         {
-            if (viewModel.OfficeId != 0)
+            try
             {
                 var office = _officeRepository.GetOfficeById(viewModel.OfficeId);
-                if (office.Logs.Any(l => l.Expenseid == viewModel.ExpenseId))
-                {
-                    var expense = office.Logs.FirstOrDefault(l => l.Expenseid == viewModel.ExpenseId).Expense;
-                    var listView = new CategoryListViewModel(office.Name, expense.Name, office.Logs.Where(l => l.Expenseid == expense.Expenseid));
-                    CategoryListRequest.Raise(new Notification { Content = listView, Title = office.Name });
-                }
-                else
-                {
-                    RaiseNotification(string.Format("No Expenses of the select type where found for {0}.", office.Name));
-                }
+                var expense = office.Logs.FirstOrDefault(l => l.Expenseid == viewModel.ExpenseId).Expense;
+                var listView = new CategoryListViewModel(office.Name, expense.Name, office.Logs.Where(l => l.Expenseid == expense.Expenseid));
+                CategoryListRequest.Raise(new Notification { Content = listView, Title = office.Name });
             }
-        }
-
-        private void RaiseNotification(string message) 
-        {
-            this.ExpensesNotFoundRequest.Raise(
-               new Notification { Content = message, Title = "Notification" },
-               n => {  });
+            catch(Exception e)
+            {
+                _logger.Log(e.Message, Category.Exception, Priority.Medium);
+            }
         }
 
         public void OnNavigatedTo(NavigationContext navigationContext)

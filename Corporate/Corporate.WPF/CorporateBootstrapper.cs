@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 
+using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.UnityExtensions;
 using Microsoft.Practices.Unity;
@@ -26,13 +27,13 @@ namespace Corporate.WPF
             base.ConfigureModuleCatalog();
             var moduleCatalog = (ModuleCatalog)this.ModuleCatalog;
             moduleCatalog.AddModule(typeof(Domain.DomainModule));
-            moduleCatalog.AddModule(typeof(Service.ServiceModule));
+            moduleCatalog.AddModule(typeof(Service.ServiceModule));           
             moduleCatalog.AddModule(typeof(Expenditures.ExpenditureModule));
         }
 
-        //protected override Microsoft.Practices.Prism.Logging.ILoggerFacade CreateLogger()
-        //{
-        //    return base.CreateContainer().Resolve<ILoggerFacade>();
-        //}
+        protected override ILoggerFacade CreateLogger()
+        {
+            return new CorporateLogger();
+        }
     }
 }

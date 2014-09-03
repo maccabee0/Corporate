@@ -17,7 +17,7 @@ namespace Corporate.Service
 
         public void Initialize()
         {
-            _container.RegisterType<ILoggerFacade, ExceptionRepository>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<IExceptionLogRepository, ExceptionRepository>(new ContainerControlledLifetimeManager());
             _container.RegisterType<IExpenseLogRepository, ExpenseLogRepository>();
             _container.RegisterType<IOfficeRepository, OfficeRepository>();
             _container.RegisterType<IExpenseRepository, ExpenseRepository>();
