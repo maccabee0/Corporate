@@ -45,7 +45,7 @@
             </i:Interaction.Behaviors>
             <DataGrid.Resources>
                 <DataTemplate x:Key="ButtonTemplate">
-                    <Button Content="{Binding}" Style="{StaticResource DataGridButton}"
+                    <Button Content="{Binding}" Style="{StaticResource DataGridButton}" IsEnabled="{Binding IsEnabled}"
                                 Command="{Binding DataSource.ReviewByCategoryCommand, 
                         Source={StaticResource DataContextProxy}}" CommandParameter="{Binding}" >
                     </Button>

@@ -46,7 +46,7 @@ namespace Corporate.Expenditures.ViewModels
 
         public ICommand ReviewByCategoryCommand
         {
-            get { return _reviewByCategoryCommand ?? (_reviewByCategoryCommand = new DelegateCommand<TotalsCellViewModel>(ReviewByCategory, CanReviewByCategory)); }
+            get { return _reviewByCategoryCommand ?? (_reviewByCategoryCommand = new DelegateCommand<TotalsCellViewModel>(ReviewByCategory)); }
         }
 
         public bool KeepAlive { get { return false; } }

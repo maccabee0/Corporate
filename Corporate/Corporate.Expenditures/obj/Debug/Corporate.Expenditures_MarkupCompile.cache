@@ -16,5 +16,5 @@ DEBUG;TRACE
 78507043046
 Theme\Theme.xaml;Views\CategoryListView.xaml;Views\EditView.xaml;Views\MainView.xaml;Views\ReviewOfficeView.xaml;Views\ReviewView.xaml;
 
-True
+False
 
